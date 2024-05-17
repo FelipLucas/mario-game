@@ -1,0 +1,169 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mario-game{
+    position: relative;
+    max-width: 80%;
+    height: 500px;
+    margin: 10rem auto;
+    border: 1px solid #000000;
+    border-bottom: 15px solid green;
+    overflow: hidden;
+    background: url("https://img.freepik.com/premium-photo/blue-hand-painted-abstract-watercolor-texture-background_667461-861.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.grama{
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    width: 100px;
+}
+
+.clouds{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 350px;
+    object-fit: cover;
+    animation: clouds-animation 15s infinite linear;
+}
+
+.clouds-2{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 300px;
+}
+
+.clouds-3{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 300px;
+    animation: clouds2-animation 30s infinite linear;
+}
+
+@keyframes clouds-animation{
+    from{
+        left: 5%;
+    }
+    to{
+        left: -350px;
+    }
+}
+@keyframes clouds2-animation{
+    from{
+        right: 5%;
+    }
+    to{
+        right: 100%;
+    }
+}
+
+.mario{
+    position: absolute;
+    bottom: 0;
+    left: 3%;
+    width: 150px;
+}
+
+.mario.jump{
+    animation: jump 500ms ease-out;
+}
+
+@keyframes jump{
+    0%{
+        bottom: 0;
+    }
+    40%{
+        bottom: 180px;
+    }
+    50%{
+        bottom: 180px;
+    }
+    60%{
+        bottom: 180px;
+    }
+    100%{
+        bottom: 0;
+    }
+}
+
+/*pipe*/
+.pipe{
+    position: absolute;
+    bottom: 0;
+    width: 70px;
+    right: 0;
+    /*left: 150px;*/
+    animation: pipe-animation 2s infinite linear;
+}
+
+@keyframes pipe-animation {
+    from{
+        right: -70px;
+    }
+    to{
+        right: 100%;
+    }
+}
+
+.div-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.velocidade-aumentar{
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    background: #000000;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.velocidade-diminuir{
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    background: #000000;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.game-over{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+}
+
+.audio-game-over{
+    display: none;
+}
+
+.audio-coin{
+    display: none;
+}
+
+.coin-icon{
+    display: none;
+    position: absolute;
+    top: 45%;
+    left: 12%;
+    width: 30px;
+    transition: .5s ease;
+}
