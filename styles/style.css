@@ -90,7 +90,7 @@ body{
         left: 5%;
     }
     to{
-        left: -350px;
+        left: -500px;
     }
 }
 @keyframes clouds2-animation{
@@ -176,13 +176,21 @@ body{
 .pipe{
     position: absolute;
     bottom: 0;
-    width: 80px;
     right: 5%;
+    width: 80px;
     /*left: 150px;*/
 }
 
+.turtle{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 80px;
+}
+
 .pipe-animation{
-    animation: pipe-animation 1s infinite linear;
+    animation: pipe-animation .6s infinite linear;
 }
 
 @keyframes pipe-animation {
