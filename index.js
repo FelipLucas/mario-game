@@ -24,20 +24,10 @@ const startGame = () =>{
 }
 
 //restart
-/*const restartGame = () =>{
-    pipe.classList.remove('.pipe-animation')
-
-    gameOver.style.opacity = '0';
-
-    mario.src = 'images/mario.gif';
-    marioSuper.style.display = 'block'
-
-    start.style.display = 'block'
-    restart.style.opacity = '0';
-    restart.style.top = '0';
-
+const restartGame = () =>{
+    window.location.reload();
     audioGameOver.pause()
-}*/
+}
 
 //jump
 const jump = () =>{
@@ -65,7 +55,7 @@ const loop = setInterval(() =>{
         audioStart.pause()
         audioGameOver.play()
 
-        //restart.style.display = 'block';
+        restart.style.display = 'block';
     }
 },10);
 
