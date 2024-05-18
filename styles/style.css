@@ -18,11 +18,34 @@
     background-size: 100%;
 }
 
-.grama{
-    display: none;
+.div-contagem{
+    display: flex;
+    align-items: center;
     position: absolute;
-    bottom: -40px;
-    width: 100px;
+    top: 0;
+    right: 0;
+    gap: 2rem;
+    padding: 20px;
+}
+
+.div-pontuação p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.moedas{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.grama{
+    display: block;
+    position: absolute;
+    bottom: -45px;
+    left: 0px;
+    width: 100%;
+    z-index: 9999;
 }
 
 .clouds{

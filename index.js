@@ -1,8 +1,6 @@
 const mario = document.querySelector('.mario');
 const pipeStop = document.querySelector('.pipe');
 const gameOver = document.querySelector('.game-over');
-const gameAudio = document.querySelector('.audio-game-over');
-const gameCoin = document.querySelector('.coin-icon');
 const jump = () =>{
     mario.classList.add('jump');
     setTimeout(() => {
@@ -15,7 +13,14 @@ const jump = () =>{
 const loop = setInterval(() =>{
     const coinAudio = document.querySelector('.audio-coin');
     const pipePosition = pipeStop.offsetLeft;
-    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '')
+    const pipePositionRight = window.getComputedStyle(pipeStop).right.replace('px', '');
+    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+    const gameAudio = document.querySelector('.audio-game-over');
+    const gameCoin = document.querySelector('.coin-icon');
+    let CoinContagem = document.querySelector('.p-contagem');
+    CoinContagem.value = 0;
+    CoinContagem.innerHTML = `+${CoinContagem.value}`
+    pontuaçao.innerHTML = `${pipePositionRight}`
     //console.log(pipePosition)
     //console.log(marioPosition)
     if(pipePosition <= 150 && pipePosition > 0 && marioPosition < 80){
@@ -31,6 +36,7 @@ const loop = setInterval(() =>{
         gameAudio.style.display = 'block';
     }
     if(marioPosition > 80){
+        CoinContagem.value = 4;
         gameCoin.style.display = 'block';
         coinAudio.style.display = 'block'
     }else{
@@ -45,9 +51,10 @@ document.addEventListener('keydown', jump); //tecla para pulo
 let pipe = document.querySelector('.pipe');
 let avançar = document.querySelector('.velocidade-aumentar');
 let diminuir = document.querySelector('.velocidade-diminuir');
+let pontuaçao = document.querySelector('.pontuação');
 
 avançar.addEventListener('click', function(){
-    pipe.style.animation = 'pipe-animation 1s infinite linear';
+    pipe.style.animation = 'pipe-animation 1s .5s infinite linear';
     /*setTimeout(() => {
         pipe.style.animation = 'pipe-animation 2s infinite linear';
     },10000);*/
