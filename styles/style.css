@@ -3,29 +3,31 @@
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+body{
+    overflow: hidden;
+}
 
 .mario-game{
     position: relative;
-    max-width: 80%;
-    height: 500px;
-    margin: 10rem auto;
-    border: 1px solid #000000;
-    border-bottom: 15px solid green;
+    max-width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    border-bottom: 18px solid green;
     overflow: hidden;
     background: url("https://img.freepik.com/premium-photo/blue-hand-painted-abstract-watercolor-texture-background_667461-861.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
+    background-position-y: 100%;
 }
 
 .div-contagem{
     display: flex;
     align-items: center;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5%;
+    right: 3%;
     gap: 2rem;
-    padding: 20px;
 }
 
 .div-pontuação p{
@@ -48,13 +50,22 @@
     z-index: 9999;
 }
 
+.super-mario{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 700px;
+    transition: .5s ease;
+}
+
 .clouds{
     position: absolute;
-    top: 5%;
+    top: 15%;
     left: 5%;
     width: 350px;
     object-fit: cover;
-    animation: clouds-animation 15s infinite linear;
+    animation: clouds-animation 20s infinite linear;
 }
 
 .clouds-2{
@@ -62,15 +73,16 @@
     top: 30%;
     left: 50%;
     transform: translate(-50%);
-    width: 300px;
+    width: 350px;
+    animation: clouds3-animation 30s infinite linear;
 }
 
 .clouds-3{
     position: absolute;
-    top: 5%;
+    top: 10%;
     right: 5%;
-    width: 300px;
-    animation: clouds2-animation 30s infinite linear;
+    width: 350px;
+    animation: clouds2-animation 35s infinite linear;
 }
 
 @keyframes clouds-animation{
@@ -86,7 +98,15 @@
         right: 5%;
     }
     to{
-        right: 95%;
+        right: 50%;
+    }
+}
+@keyframes clouds3-animation{
+    from{
+        left: 50%;
+    }
+    to{
+        left: 0%;
     }
 }
 
@@ -94,10 +114,10 @@
     position: absolute;
     bottom: 0;
     left: 3%;
-    width: 150px;
+    width: 170px;
 }
 
-.mario.jump{
+.jump{
     animation: jump 500ms ease-out;
 }
 
@@ -119,14 +139,51 @@
     }
 }
 
+/*botão iniciar*/
+.div-iniciar{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.div-iniciar button{
+    width: 150px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ff0000;
+    border: none;
+    font-family: 'JetBrains', monospace;
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.div-iniciar button:hover{
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #000000;
+}
+.div-iniciar button:focus{
+    transform: translateY(5px);
+}
+
+.restart{
+    display: none;
+}
+
 /*pipe*/
 .pipe{
     position: absolute;
     bottom: 0;
-    width: 70px;
-    right: 0;
+    width: 80px;
+    right: 5%;
     /*left: 150px;*/
-    animation: pipe-animation 2s infinite linear;
+}
+
+.pipe-animation{
+    animation: pipe-animation 1s infinite linear;
 }
 
 @keyframes pipe-animation {
@@ -139,7 +196,8 @@
 }
 
 .div-buttons{
-    display: flex;
+    position: absolute;
+    display: none;
     justify-content: center;
     align-items: center;
     gap: 2rem;

@@ -1,0 +1,63 @@
+
+
+const jump = () =>{
+    mario.classList.add('jump');
+    setTimeout(() => {
+        mario.classList.remove('jump')
+    },500);
+} //pulo do mario
+const gameOver = document.querySelector('.game-over');
+const gameAudio = new Audio('.images/D2ZZHGM-game-over.mp3');
+
+
+//loop de acabar o jogo ou não
+const loop = setInterval(() =>{
+    const pipePosition = pipeStop.offsetLeft;
+    const pipePositionRight = window.getComputedStyle(pipeStop).right.replace('px', '');
+    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+    
+    if(pipePosition <= 150 && pipePosition > 0 && marioPosition < 80){
+        pipe.style.animation = 'none';
+        pipe.style.left = `${pipePosition}px`;
+
+        mario.style.animation = 'none';
+        mario.style.bottom = `${marioPosition}px`;
+        mario.src = 'images/game-over.png';
+        mario.style.width = '80px';
+        
+        gameOver.style.display = 'block';
+        gameAudio.play()
+    }
+    if(marioPosition > 80){
+        CoinContagem.value = 4;
+        gameCoin.style.display = 'block';
+        coinAudio.style.display = 'block'
+    }else{
+        gameCoin.style.display = 'none';
+        coinAudio.style.display = 'none';
+    }
+},10);
+
+document.addEventListener('keydown', jump); //tecla para pulo
+
+/*iniciar*/
+const iniciar = documen.querySelector('.div-iniciar')
+    function startGame(){
+    iniciar.style.display = 'none';
+}
+//botões de aumentar a velocidade ou diminuir
+let pipe = document.querySelector('.pipe');
+let avançar = document.querySelector('.velocidade-aumentar');
+let diminuir = document.querySelector('.velocidade-diminuir');
+let pontuaçao = document.querySelector('.pontuação');
+
+avançar.addEventListener('click', function(){
+    pipe.style.animation = 'pipe-animation 1s .5s infinite linear';
+    /*setTimeout(() => {
+        pipe.style.animation = 'pipe-animation 2s infinite linear';
+    },10000);*/
+});
+
+diminuir.addEventListener('click', () =>{
+    pipe.style.animation = 'pipe-animation 2s infinite linear'
+})

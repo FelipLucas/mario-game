@@ -1,30 +1,59 @@
 const mario = document.querySelector('.mario');
-const pipeStop = document.querySelector('.pipe');
-const gameOver = document.querySelector('.game-over');
+const marioSuper = document.querySelector('.super-mario')
+const pipe = document.querySelector('.pipe'); 
+const start = document.querySelector('.div-iniciar');   
+const restart = document.querySelector('.restart')
+const gameOver = document.querySelector('.game-over');   
+const points = document.querySelector('.pontuação');
+
+audioStart = new Audio('images/goons-electronic-march-video-game-rpg-trolls-ogres-orcs-attack-145267.mp3')
+audioGameOver = new Audio('images/D2ZZHGM-game-over.mp3')
+
+//pontuação
+
+
+//start
+const startGame = () =>{
+    pipe.classList.add('pipe-animation')
+    start.style.display = 'none';
+    marioSuper.style.top = '5%';
+    marioSuper.style.left = '7%';
+    marioSuper.style.width = '200px';
+
+    audioStart.play() //audio
+}
+
+//restart
+/*const restartGame = () =>{
+    pipe.classList.remove('.pipe-animation')
+
+    gameOver.style.opacity = '0';
+
+    mario.src = 'images/mario.gif';
+    marioSuper.style.display = 'block'
+
+    start.style.display = 'block'
+    restart.style.opacity = '0';
+    restart.style.top = '0';
+
+    audioGameOver.pause()
+}*/
+
+//jump
 const jump = () =>{
-    mario.classList.add('jump');
-    setTimeout(() => {
+    mario.classList.add('jump')
+    setTimeout(() =>{
         mario.classList.remove('jump')
-    },500);
-} //pulo do mario
+    }, 500)
+}
 
-
-//loop de acabar o jogo ou não
+//loop
 const loop = setInterval(() =>{
-    const coinAudio = document.querySelector('.audio-coin');
-    const pipePosition = pipeStop.offsetLeft;
-    const pipePositionRight = window.getComputedStyle(pipeStop).right.replace('px', '');
+    const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
-    const gameAudio = document.querySelector('.audio-game-over');
-    const gameCoin = document.querySelector('.coin-icon');
-    let CoinContagem = document.querySelector('.p-contagem');
-    CoinContagem.value = 0;
-    CoinContagem.innerHTML = `+${CoinContagem.value}`
-    pontuaçao.innerHTML = `${pipePositionRight}`
-    //console.log(pipePosition)
-    //console.log(marioPosition)
+    
     if(pipePosition <= 150 && pipePosition > 0 && marioPosition < 80){
-        pipe.style.animation = 'none';
+        pipe.classList.remove('pipe-animation');
         pipe.style.left = `${pipePosition}px`;
 
         mario.style.animation = 'none';
@@ -33,33 +62,11 @@ const loop = setInterval(() =>{
         mario.style.width = '80px';
         
         gameOver.style.display = 'block';
-        gameAudio.style.display = 'block';
-    }
-    if(marioPosition > 80){
-        CoinContagem.value = 4;
-        gameCoin.style.display = 'block';
-        coinAudio.style.display = 'block'
-    }else{
-        gameCoin.style.display = 'none';
-        coinAudio.style.display = 'none';
+        audioStart.pause()
+        audioGameOver.play()
+
+        //restart.style.display = 'block';
     }
 },10);
 
 document.addEventListener('keydown', jump); //tecla para pulo
-
-//botões de aumentar a velocidade ou diminuir
-let pipe = document.querySelector('.pipe');
-let avançar = document.querySelector('.velocidade-aumentar');
-let diminuir = document.querySelector('.velocidade-diminuir');
-let pontuaçao = document.querySelector('.pontuação');
-
-avançar.addEventListener('click', function(){
-    pipe.style.animation = 'pipe-animation 1s .5s infinite linear';
-    /*setTimeout(() => {
-        pipe.style.animation = 'pipe-animation 2s infinite linear';
-    },10000);*/
-});
-
-diminuir.addEventListener('click', () =>{
-    pipe.style.animation = 'pipe-animation 2s infinite linear'
-})
