@@ -190,7 +190,7 @@ body{
 }
 
 .pipe-animation{
-    animation: pipe-animation 1s infinite linear;
+    animation: pipe-animation .7s infinite linear;
 }
 
 @keyframes pipe-animation {

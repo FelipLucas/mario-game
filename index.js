@@ -11,7 +11,6 @@ audioGameOver = new Audio('images/D2ZZHGM-game-over.mp3')
 
 //pontuação
 
-
 //start
 const startGame = () =>{
     pipe.classList.add('pipe-animation')
