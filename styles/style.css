@@ -4,7 +4,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body{
-    overflow: hidden;
+    height: 100vh;
 }
 
 .mario-game{
@@ -12,7 +12,7 @@ body{
     max-width: 100%;
     height: 100vh;
     margin: 0 auto;
-    border-bottom: 18px solid green;
+    border-bottom: 30px solid green;
     overflow: hidden;
     background: url("https://img.freepik.com/premium-photo/blue-hand-painted-abstract-watercolor-texture-background_667461-861.jpg");
     background-repeat: no-repeat;
@@ -190,7 +190,7 @@ body{
 }
 
 .pipe-animation{
-    animation: pipe-animation .6s infinite linear;
+    animation: pipe-animation 1s infinite linear;
 }
 
 @keyframes pipe-animation {
@@ -254,4 +254,65 @@ body{
     left: 12%;
     width: 30px;
     transition: .5s ease;
+}
+
+/*dificuldade*/
+.div-chosen{
+    position: absolute;
+    top: 67%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.p-chosen{
+    text-align: center;
+    font-family: 'JetBrains', monospace;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #000000;
+    cursor: pointer;
+}
+
+.p-chosen:hover{
+    color: #000000ca;
+}
+
+.div-chosen-click{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 200px;
+    margin: 1rem 0;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+.div-chosen-click div{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+
+.div-chosen-click div::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #ff0000;
+    transition: .5s ease-in-out;
+}
+
+.div-chosen-click div:hover::after{
+    width: 100%;
+}
+
+.div-chosen-click div p{
+    font-family: 'JetBrains', monospace;
+    font-size: 16px;
 }
