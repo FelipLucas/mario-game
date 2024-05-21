@@ -190,7 +190,15 @@ body{
 }
 
 .pipe-animation{
-    animation: pipe-animation .7s infinite linear;
+    animation: pipe-animation 1.5s infinite linear;
+}
+
+.pipe-animationM{
+    animation: pipe-animation .8s infinite linear;
+}
+
+.pipe-animationH{
+    animation: pipe-animation .6s infinite linear;
 }
 
 @keyframes pipe-animation {
@@ -239,23 +247,6 @@ body{
     width: 300px;
 }
 
-.audio-game-over{
-    display: none;
-}
-
-.audio-coin{
-    display: none;
-}
-
-.coin-icon{
-    display: none;
-    position: absolute;
-    top: 45%;
-    left: 12%;
-    width: 30px;
-    transition: .5s ease;
-}
-
 /*dificuldade*/
 .div-chosen{
     position: absolute;
@@ -278,7 +269,7 @@ body{
 }
 
 .div-chosen-click{
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 3rem;
     width: 200px;
@@ -289,6 +280,10 @@ body{
     color: #ffffff;
 }
 
+.div-chosen-click.abrir-dificuldades{
+    display: flex;
+}
+
 .div-chosen-click div{
     position: relative;
     display: flex;
@@ -297,7 +292,7 @@ body{
     cursor: pointer;
 }
 
-.div-chosen-click div::after{
+/*.div-chosen-click div::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -306,7 +301,7 @@ body{
     height: 2px;
     background: #ff0000;
     transition: .5s ease-in-out;
-}
+}*/
 
 .div-chosen-click div:hover::after{
     width: 100%;
@@ -315,4 +310,19 @@ body{
 .div-chosen-click div p{
     font-family: 'JetBrains', monospace;
     font-size: 16px;
+}
+
+/*contagem de moedas*/
+.p-contagem{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 20px;
+}
+.coin{
+    display: none;
+    position: absolute;
+    bottom: 25%;
+    left: 15%;
+    width: 40px;
 }
