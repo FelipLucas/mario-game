@@ -102,18 +102,7 @@ selectDifficult.addEventListener('click', function(){
 
 //easy
 closeChosenEasy.addEventListener('click', function(){
-    selectDifficult.style.display = 'none';
-    choseDifficult.classList.remove('abrir-dificuldades');
-
-    pipe.classList.add('pipe-animation')
-
-    start.style.display = 'none';
-
-    marioSuper.style.top = '5%';
-    marioSuper.style.left = '7%';
-    marioSuper.style.width = '200px';
-
-    audioStart.play() //audio
+    startGame().play()
 })
 
 //mediun
