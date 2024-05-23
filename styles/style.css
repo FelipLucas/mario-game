@@ -182,7 +182,6 @@ body{
 }
 
 .turtle{
-    display: none;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -201,6 +200,10 @@ body{
     animation: pipe-animation .55s infinite linear;
 }
 
+.turtle-animation{
+    animation: turtle-animation 5s infinite linear;
+}
+
 @keyframes pipe-animation {
     from{
         right: -70px;
@@ -210,32 +213,13 @@ body{
     }
 }
 
-.div-buttons{
-    position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-.velocidade-aumentar{
-    width: 200px;
-    padding: 20px;
-    text-align: center;
-    background: #000000;
-    border-radius: 10px;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-.velocidade-diminuir{
-    width: 200px;
-    padding: 20px;
-    text-align: center;
-    background: #000000;
-    border-radius: 10px;
-    color: #ffffff;
-    cursor: pointer;
+@keyframes turtle-animation{
+    from{
+        left: 50%;
+    }
+    to{
+        left: -80px;
+    }
 }
 
 .game-over{
