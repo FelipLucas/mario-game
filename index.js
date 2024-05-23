@@ -28,7 +28,6 @@ const startGame = () =>{
 
     audioStart.play() //audio
     audioFala.play()
-    audioFala.loop(0)
 };
 
 
@@ -93,6 +92,7 @@ const loop = setInterval(() =>{
 
             audioGameOver.pause()
             audioRoundTwo.play()
+            audioRoundTwo.loop(1)
             audioStart.pause() //audio
             audioCoin.pause()
         }, 30000)
