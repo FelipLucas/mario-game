@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -8,6 +9,7 @@ body{
 }
 
 .mario-game{
+    display: block;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -320,4 +322,69 @@ body{
 
 .coin{
     width: 40px;
+}
+
+/*you win*/
+.div-you-win{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+.div-you-win-align{
+    position: relative;
+}
+
+.div-you-win img{
+    width: 100vw;
+    height: 101vh;
+    object-fit: cover;
+    image-rendering: optimizeQuality;
+}
+
+.div-next-round{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.div-you-win p{
+    font-size: 90px;
+    font-family: "Silkscreen", sans-serif;
+    color: #ffffff;
+    z-index: 99999;
+}
+
+/*segundo game*/
+.super-mario-game{
+    display: none;
+    position: relative;
+    max-width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+    background: url("https://img.freepik.com/premium-photo/blue-hand-painted-abstract-watercolor-texture-background_667461-861.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    background-position-y: 100%;
+}
+
+.cenario{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 500%;
+}
+
+.mario-two{
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+    width: 170px;
 }
