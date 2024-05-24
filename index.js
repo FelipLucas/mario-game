@@ -13,6 +13,8 @@ audioGameOver = new Audio('images/D2ZZHGM-game-over.mp3')
 audioCoin = new Audio('images/retro-video-game-coin-pickup-38299.mp3')
 audioRoundTwo = new Audio('images/audio-round-two.mp3')
 
+coinValor = 0;
+
 //start
 const startGame = () =>{
     pipe.classList.add('pipe-animation')
@@ -39,7 +41,8 @@ const restartGame = () =>{
 
 //jump
 document.addEventListener('keydown', function(event){
-    if(event.key === "ArrowUp"){
+    if(event.key === "ArrowDown"){
+        coinValor++;
         mario.classList.add('jump')
         setTimeout(() =>{
             mario.classList.remove('jump')
@@ -101,15 +104,14 @@ const loop = setInterval(() =>{
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';
+        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin"> +${coinValor}`
         audioCoin.play()
-        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin"> +1`;
+
     } else{
         coin.style.display = 'none';
         coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin">`;
     }
 },10);
-
-//coin 
 
 //dificuldade
 let selectDifficult = document.querySelector('.p-chosen');
@@ -174,25 +176,39 @@ nextRound.addEventListener('click', () =>{
     audioStart.play()
     audio.start.loop(1)
 })
-document.addEventListener('keydown', function(event){
+
+//movimento do personagem
+function teclaPressionada(event){
     if(event.key === "ArrowRight"){
-        direcao = +1;
-        posicao += direcao * velocidade;
-        personagem.style.left = posicao + "px";
-         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true alt';
+        direcao = 1;
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
     } else if(event.key === "ArrowLeft"){
         direcao = -1;
-        posicao += direcao * velocidade;
-        personagem.style.left = posicao + "px";
-        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioParadoLadoEsquerdo.png?raw=true';
-    } 
-})
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoEsquerdo.gif?raw=true';
+    }
+}
+
+function teclaSolta(event){
+    if(event.key === "ArrowRight"){
+        direcao = 0;
+    } else if(event.key === "ArrowLeft"){
+        direcao = 0;
+    }
+}
+
+function atualizarMovimentos(){
+    posicao += direcao * velocidade;
+    personagem.style.left = posicao + 'px';
+}
+document.addEventListener('keydown', teclaPressionada);
+document.addEventListener('keyup', teclaSolta);
+setInterval(atualizarMovimentos, 50);
 
 document.addEventListener('keydown', function(event){
-    if(event.key === "ArrowUp"){
+    if(event.key === "keypress"){
         personagem.classList.add('jump2')
         setTimeout(() =>{
             personagem.classList.remove('jump2')
         },1000)
     }
-})
+});

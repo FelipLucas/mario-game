@@ -9,7 +9,7 @@ body{
 }
 
 .mario-game{
-    display: block;
+    display: none;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -362,7 +362,7 @@ body{
 
 /*segundo game*/
 .super-mario-game{
-    display: none;
+    display: block;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -406,12 +406,17 @@ body{
     object-fit: cover;
 }
 
-.hud{
+.div-hud{
     position: absolute;
     top: 5%;
     left: 20%;
-    width: 65%;
     margin: 0 auto;
+    width: 100%;
+}
+
+.hud{
+    position: relative;
+    width: 65%;
 }
 
 .jump2{
