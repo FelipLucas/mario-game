@@ -303,7 +303,7 @@ body{
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .div-coin{
@@ -368,10 +368,10 @@ body{
     height: 100vh;
     margin: 0 auto;
     overflow: hidden;
-    background: url("https://img.freepik.com/premium-photo/blue-hand-painted-abstract-watercolor-texture-background_667461-861.jpg");
+    background: url("https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/cenarioCeuAlternativo.png?raw=true");
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
+    background-position: top center;
+    background-size: 120%;
     background-position-y: 100%;
 }
 
@@ -379,12 +379,59 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 500%;
+    width: 450%;
 }
 
 .mario-two{
     position: absolute;
     bottom: 8%;
     left: 5%;
-    width: 170px;
+    width: 65px;
+    object-fit: cover;
+}
+
+.inimigo{
+    position: absolute;
+    bottom: 8%;
+    right: 5%;
+    width: 50px;
+    object-fit: cover;
+}
+
+.block{
+    position: absolute;
+    top: 65%;
+    left: 55%;
+    width: 55px;
+    object-fit: cover;
+}
+
+.hud{
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    width: 65%;
+    margin: 0 auto;
+}
+
+.jump2{
+    animation: jump2 500ms ease-out;
+}
+
+@keyframes jump2{
+    0%{
+        bottom: 8%;
+    }
+    40%{
+        bottom: 255px;
+    }
+    50%{
+        bottom: 255px;
+    }
+    60%{
+        bottom: 255px;
+    }
+    100%{
+        bottom: 8%;
+    }
 }

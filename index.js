@@ -38,12 +38,14 @@ const restartGame = () =>{
 }
 
 //jump
-const jump = () =>{
-    mario.classList.add('jump')
-    setTimeout(() =>{
-        mario.classList.remove('jump')
-    }, 500)
-}
+document.addEventListener('keydown', function(event){
+    if(event.key === "ArrowUp"){
+        mario.classList.add('jump')
+        setTimeout(() =>{
+            mario.classList.remove('jump')
+        },500)
+    }
+})
 
 //loop
 const loop = setInterval(() =>{
@@ -92,7 +94,7 @@ const loop = setInterval(() =>{
 
             audioGameOver.pause()
             audioRoundTwo.play()
-            audioRoundTwo.loop(1)
+            audioRoundTwo.loop(0)
             audioStart.pause() //audio
             audioCoin.pause()
         }, 30000)
@@ -100,22 +102,13 @@ const loop = setInterval(() =>{
     if(marioPosition > 80){
         coin.style.display = 'flex';
         audioCoin.play()
-        coinContagem.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="gold" class="bi bi-coin" viewBox="0 0 16 16">
-            <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-            <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
-            </svg> +1`;
+        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin"> +1`;
     } else{
         coin.style.display = 'none';
-        coinContagem.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-coin" viewBox="0 0 16 16">
-        <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
-    </svg>`;
+        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin">`;
     }
 },10);
-
-document.addEventListener('keydown', jump); //tecla para pulo
 
 //coin 
 
@@ -168,9 +161,39 @@ closeChosenHard.addEventListener('click', function(){
 })
 
 //next round
+const personagem = document.querySelector(".mario-two");
 let nextRound = document.querySelector('.div-next-round');
+
+let posicao = 0;
+let direcao = 0;
+let velocidade = 10;
 
 nextRound.addEventListener('click', () =>{
     telaOne.style.display = 'none';
     telaTwo.style.display = 'block'
+
+    audioStart.play()
+    audio.start.loop(1)
+})
+document.addEventListener('keydown', function(event){
+    if(event.key === "ArrowRight"){
+        direcao = +1;
+        posicao += direcao * velocidade;
+        personagem.style.left = posicao + "px";
+         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true alt';
+    } else if(event.key === "ArrowLeft"){
+        direcao = -1;
+        posicao += direcao * velocidade;
+        personagem.style.left = posicao + "px";
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioParadoLadoEsquerdo.png?raw=true';
+    } 
+})
+
+document.addEventListener('keydown', function(event){
+    if(event.key === "ArrowUp"){
+        personagem.classList.add('jump2')
+        setTimeout(() =>{
+            personagem.classList.remove('jump2')
+        },500)
+    }
 })
