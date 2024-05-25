@@ -41,7 +41,7 @@ const restartGame = () =>{
 
 //jump
 document.addEventListener('keydown', function(event){
-    if(event.key === "ArrowDown"){
+    if(event.code === "Space"){
         coinValor++;
         mario.classList.add('jump')
         setTimeout(() =>{
@@ -163,7 +163,13 @@ closeChosenHard.addEventListener('click', function(){
 
 //next round
 const personagem = document.querySelector(".mario-two");
-let nextRound = document.querySelector('.div-next-round');
+const nextRound = document.querySelector('.div-next-round');
+const larguraCenario = telaTwo.offsetWidth;
+const larguraPersonagem = personagem.offsetWidth;
+
+audioJump = new Audio("images/maro-jump-sound-effect_1.mp3")
+//audioJump.volume = '0.7';
+audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
 
 let posicao = 0;
 let direcao = 0;
@@ -185,13 +191,15 @@ function teclaPressionada(event){
     } else if(event.key === "ArrowLeft"){
         direcao = -1;
         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoEsquerdo.gif?raw=true';
-    }
+    } 
 }
 
 function teclaSolta(event){
     if(event.key === "ArrowRight"){
         direcao = 0;
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioParadoLadoDireito.png?raw=true';
     } else if(event.key === "ArrowLeft"){
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioParadoLadoEsquerdo.png?raw=true';
         direcao = 0;
     }
 }
@@ -199,16 +207,53 @@ function teclaSolta(event){
 function atualizarMovimentos(){
     posicao += direcao * velocidade;
     personagem.style.left = posicao + 'px';
+    if(posicao < 0){
+        posicao = 0;
+    } else if(posicao +larguraPersonagem > larguraCenario){
+        posicao = larguraCenario - larguraPersonagem;
+    }
 }
 document.addEventListener('keydown', teclaPressionada);
 document.addEventListener('keyup', teclaSolta);
 setInterval(atualizarMovimentos, 50);
 
 document.addEventListener('keydown', function(event){
-    if(event.key === "keypress"){
+    if(event.key === "ArrowUp"){
         personagem.classList.add('jump2')
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioOlhandoParaCimaLadoDireito.png?raw=true';
+        audioJump.play()
         setTimeout(() =>{
             personagem.classList.remove('jump2')
-        },1000)
+            personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+        },500)
     }
 });
+
+//subir nos blocos
+const subirBloco = setInterval(() =>{
+const personagemPosition = +window.getComputedStyle(personagem).bottom.replace('px', '');
+const personagemPositionDirecao = personagem.offsetLeft;
+const block = document.querySelector('.block')
+//console.log(personagemPositionDirecao)
+
+/*if(personagemPosition >90 && personagemPositionDirecao >= 470 && personagemPosition <860){
+    personagem.style.bottom = '185px';
+}else if(personagemPositionDirecao > 0 && personagemPosition < 470){
+    personagem.style.bottom = '90px';
+}*/if(personagemPosition >= 275 && personagemPositionDirecao > 1100 && personagemPositionDirecao < 1200){
+    block.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
+
+    moedasAtual++;
+    coinContagemTwo.innerHTML = moedasAtual;
+    pontosAtual++;
+    pontos.innerHTML = pontosAtual;
+    audioUp.play()
+}
+},10);
+
+//moedas 
+const pontos = document.querySelector('.p-conatem-moedas2')
+const coinContagemTwo = document.querySelector('.p-conatem-moedas')
+
+let moedasAtual = 0;
+let pontosAtual = 0;

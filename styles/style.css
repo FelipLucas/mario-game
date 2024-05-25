@@ -368,11 +368,10 @@ body{
     height: 100vh;
     margin: 0 auto;
     overflow: hidden;
-    background: url("https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/cenarioCeuAlternativo.png?raw=true");
+    background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 120%;
-    background-position-y: 100%;
+    background-size: 450%;
+   background-position: bottom left;
 }
 
 .cenario{
@@ -382,20 +381,28 @@ body{
     width: 450%;
 }
 
+.ceu{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
 .mario-two{
     position: absolute;
-    bottom: 8%;
+    bottom: 90px;
     left: 5%;
-    width: 65px;
+    width: 50px;
     object-fit: cover;
 }
 
 .inimigo{
     position: absolute;
-    bottom: 8%;
+    bottom: 90px;
     right: 5%;
-    width: 50px;
+    width: 40px;
     object-fit: cover;
+    animation: inimigo-animation 18s infinite linear;
 }
 
 .block{
@@ -415,8 +422,22 @@ body{
 }
 
 .hud{
-    position: relative;
     width: 65%;
+}
+
+.coin-two{
+    position: absolute;
+    top: 7.5%;
+    right: 19%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coin-two p{
+    color: #ffffffbd;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 40px;
 }
 
 .jump2{
@@ -425,18 +446,33 @@ body{
 
 @keyframes jump2{
     0%{
-        bottom: 8%;
+        bottom: 90px;
     }
     40%{
-        bottom: 255px;
+        bottom: 300px;
     }
     50%{
-        bottom: 255px;
+        bottom: 300px;
     }
     60%{
-        bottom: 255px;
+        bottom: 300px;
+    }
+    70%{
+        bottom: 300px;
+    }
+    80%{
+        bottom: 300px;
     }
     100%{
-        bottom: 8%;
+        bottom: 90px;
+    }
+}
+
+@keyframes inimigo-animation {
+    from{
+        right: -180px;
+    }
+    to{
+        right: 105%;
     }
 }
