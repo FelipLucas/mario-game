@@ -91,11 +91,10 @@ const loop = setInterval(() =>{
             telaOne.style.border = 'none';
 
             audioGameOver.pause()
-            audioGameOver.loop(0);  
             audioRoundTwo.play()
             audioStart.pause() //audio
             audioCoin.pause()
-        }, 30000)
+        }, 1000)
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';
@@ -169,13 +168,14 @@ closeChosenHard.addEventListener('click', function(){
 const telaTwo = document.querySelector('.super-mario-game');
 const personagem = document.querySelector(".mario-two");
 const nextRound = document.querySelector('.div-next-round');
-const larguraCenario = telaTwo.offsetWidth;
+const larguraCenario = telaOne.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
-audioJump = new Audio("images/maro-jump-sound-effect_1.mp3")
-audioJump.volume = '0.5';
+audioJump = new Audio("images/audios_audioPulo.wav")
 audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
 audioDeath = new Audio('images/Mario Death - QuickSounds.com.mp3')
+audioTempoAcabando = new Audio('images/hello-mario.mp3')
+audioStartGame = new Audio('images/audios_audioEsperandoIniciarJogo.wav')
 
 let posicao = 0;
 let direcao = 0;
@@ -185,8 +185,7 @@ nextRound.addEventListener('click', () =>{
     telaOne.style.display = 'none';
     telaTwo.style.display = 'block';
 
-    clearTimeout
-    audioStart.play()
+    audioStartGame.play()
 })
 
 //movimento do personagem
@@ -270,34 +269,59 @@ const coinContagemTwo = document.querySelector('.p-conatem-moedas');
 const vida = document.querySelector('.div-vida');
 const tempo = document.querySelector('.time')
 const inimigo = document.querySelector('.inimigo');
+const gameOverTwo = document.querySelector('.game-over-two');
 
 let tempoAtual = 400;
 let moedasAtual = 0;
 let pontosAtual = 0;
 let vidaAtual = 5;
 
-/*const colisaoInimigo = setInterval(() =>{
+//colisao inimigo
+const colisaoInimigo = setInterval(() =>{
     const inimigoPosition = inimigo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
     const overlay = document.querySelector('.overlay')
     if(inimigoPosition.left < personagemPosition.right && inimigoPosition.right > personagemPosition.left && inimigoPosition.top < personagemPosition.bottom){
         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioMorto.gif?raw=true';
         personagem.style.animation = 'none';
+        gameOverTwo.style.display = 'block';
 
-        direcao = 0
-        velocidade = 0
+        inimigo.style.animation = 'none';
+
+        pararTeclas();
         vida.innerHTML = '<img src="https://www.svgrepo.com/show/398320/skull-and-crossbones.svg" alt="" style="width: 35px; height: 35px; margin-top: 10px;">';
 
         audioDeath.play()
         audioJump.volume = '0';
-    }
-},10);*/
+    } /*else if(personagemPosition.bottom < inimigoPosition.top && inimigoPosition.left > personagemPosition.right){
+        inimigo.style.width = '20px';
+        inimigo.style.display = 'none';
+    }*/
+},10);
 
 function relogio(){
     tempoAtual--;
     tempo.textContent = tempoAtual;
-    if(tempoAtual == -100){
-        audioUp.play()
+    if(tempoAtual === 0){
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioMorto.gif?raw=true';
+        personagem.style.animation = 'none';
+        gameOverTwo.style.display = 'block';
+
+        pararTeclas();
+        clearInterval(checarRelogio);
+        vida.innerHTML = '<img src="https://www.svgrepo.com/show/398320/skull-and-crossbones.svg" alt="" style="width: 35px; height: 35px; margin-top: 10px;">';
+
+
+        audioDeath.play()
+        audioJump.volume = '0';
+    } else if(tempoAtual === 300){
+        audioTempoAcabando.play()
     }
 }
-setInterval(relogio, 1000);
+checarRelogio = setInterval(relogio, 1000);
+
+/*retirar teclas*/
+function pararTeclas(){
+    document.removeEventListener('keydown', teclaPressionada)
+    document.removeEventListener('keydown', teclaSolta)
+}

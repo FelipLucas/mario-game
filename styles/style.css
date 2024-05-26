@@ -9,7 +9,7 @@ body{
 }
 
 .mario-game{
-    display: none;
+    display: block;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -357,7 +357,7 @@ body{
 
 /*segundo game*/
 .super-mario-game{
-    display: block;  
+    display: none;  
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -365,7 +365,7 @@ body{
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
     background-size: 450%;
-    background-position: bottom left;
+    background-position: bottom right;
 }
 
 .cenario{
@@ -492,6 +492,16 @@ body{
 /*animação jump*/
 .jump2{
     animation: jump2 500ms ease-out;
+}
+
+/*gameOver*/
+.game-over-two{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
 }
 
 @keyframes jump2{
