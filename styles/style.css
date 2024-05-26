@@ -33,6 +33,8 @@ body{
 }
 
 .div-pontuação p{
+    display: none;
+    font-family: "Silkscreen", sans-serif;
     font-size: 20px;
     font-weight: 600;
 }
@@ -188,6 +190,7 @@ body{
     bottom: 0;
     left: 50%;
     width: 80px;
+    animation: turtle-animation 5s infinite linear;
 }
 
 .pipe-animation{
@@ -200,10 +203,6 @@ body{
 
 .pipe-animationH{
     animation: pipe-animation .55s infinite linear;
-}
-
-.turtle-animation{
-    animation: turtle-animation 5s infinite linear;
 }
 
 @keyframes pipe-animation {
@@ -303,7 +302,8 @@ body{
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 25px;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 23px;
 }
 
 .div-coin{
@@ -313,11 +313,6 @@ body{
     display: none;
     align-items: center;
     gap: .5rem;
-}
-
-.div-coin p{
-    font-size: 20px;
-    font-weight: 600;
 }
 
 .coin{
@@ -362,16 +357,15 @@ body{
 
 /*segundo game*/
 .super-mario-game{
-    display: block;
+    display: block;  
     position: relative;
     max-width: 100%;
     height: 100vh;
-    margin: 0 auto;
     overflow: hidden;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
     background-size: 450%;
-   background-position: bottom left;
+    background-position: bottom left;
 }
 
 .cenario{
@@ -400,7 +394,7 @@ body{
     position: absolute;
     bottom: 90px;
     right: 5%;
-    width: 40px;
+    width: 35px;
     object-fit: cover;
     animation: inimigo-animation 18s infinite linear;
 }
@@ -413,6 +407,7 @@ body{
     object-fit: cover;
 }
 
+/*hud*/
 .div-hud{
     position: absolute;
     top: 5%;
@@ -425,6 +420,7 @@ body{
     width: 65%;
 }
 
+/*coin*/
 .coin-two{
     position: absolute;
     top: 7.5%;
@@ -434,12 +430,66 @@ body{
     align-items: center;
 }
 
-.coin-two p{
-    color: #ffffffbd;
+.coin-two p:first-child{
+    color: #ffe032;
     font-family: "Silkscreen", sans-serif;
     font-size: 40px;
 }
 
+.coin-two p:last-child{
+    color: #ffffff;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 40px;
+}
+
+
+/*vida*/
+.div-vida{
+    position: absolute;
+    top: 10.3%;
+    left: 27%;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.div-vida svg{
+    margin-top: 8px;
+}
+
+.p-vida{
+    font-family: "Silkscreen", sans-serif;
+    font-size: 35px;
+    color: #ffffff;
+}
+
+/*overlay*/
+.overlay{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0000005b;
+    transition: .5s;
+}
+
+.overlay.abrir-overlay{
+    display: block;
+}
+
+/*tempo*/
+.time{
+    position: absolute;
+    top: 10%;
+    right: 35.3%;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 40px;
+    color: #ffec80;
+}
+
+/*animação jump*/
 .jump2{
     animation: jump2 500ms ease-out;
 }

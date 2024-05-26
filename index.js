@@ -1,11 +1,10 @@
 const mario = document.querySelector('.mario');
-const marioSuper = document.querySelector('.super-mario')
+const marioSuper = document.querySelector('.super-mario');
 const pipe = document.querySelector('.pipe'); 
 const start = document.querySelector('.div-iniciar');   
-const restart = document.querySelector('.restart')
+const restart = document.querySelector('.restart');
 const gameOver = document.querySelector('.game-over');  
-const telaOne = document.querySelector('.mario-game')
-const telaTwo = document.querySelector('.super-mario-game')
+const telaOne = document.querySelector('.mario-game');
 
 audioStart = new Audio('images/goons-electronic-march-video-game-rpg-trolls-ogres-orcs-attack-145267.mp3')
 audioFala = new Audio('images/mario-fala.mp3')
@@ -17,6 +16,7 @@ coinValor = 0;
 
 //start
 const startGame = () =>{
+    points.style.display = 'block';
     pipe.classList.add('pipe-animation')
 
     start.style.display = 'none';
@@ -55,11 +55,6 @@ const loop = setInterval(() =>{
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
-    // pontução
-    const marioPositionTwo = +window.getComputedStyle(pipe).right.replace('px', '');
-    const points = document.querySelector('.pontuação');
-    points.innerHTML = `${marioPositionTwo}`
-
     const coin = document.querySelector('.div-coin');
     const coinContagem = document.querySelector('.p-contagem');
 
@@ -96,22 +91,31 @@ const loop = setInterval(() =>{
             telaOne.style.border = 'none';
 
             audioGameOver.pause()
+            audioGameOver.loop(0);  
             audioRoundTwo.play()
-            audioRoundTwo.loop(0)
             audioStart.pause() //audio
             audioCoin.pause()
         }, 30000)
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';
-        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin"> +${coinValor}`
+        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin" style="width: 25px; height: 25px;"> +${coinValor}`
         audioCoin.play()
 
     } else{
         coin.style.display = 'none';
-        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin">`;
+        coinContagem.innerHTML = `<img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/moeda.gif?raw=true" alt="" class="coin" style="width: 25px; height: 25px;">`;
     }
 },10);
+
+  //pontuação
+  const points = document.querySelector('.pontuação');
+  let ponto = 0;
+
+  const relogioPontuacao = setInterval(() =>{
+    ponto++;
+    points.innerHTML = ponto;
+  },10);
 
 //dificuldade
 let selectDifficult = document.querySelector('.p-chosen');
@@ -162,14 +166,16 @@ closeChosenHard.addEventListener('click', function(){
 })
 
 //next round
+const telaTwo = document.querySelector('.super-mario-game');
 const personagem = document.querySelector(".mario-two");
 const nextRound = document.querySelector('.div-next-round');
 const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
 audioJump = new Audio("images/maro-jump-sound-effect_1.mp3")
-//audioJump.volume = '0.7';
+audioJump.volume = '0.5';
 audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
+audioDeath = new Audio('images/Mario Death - QuickSounds.com.mp3')
 
 let posicao = 0;
 let direcao = 0;
@@ -177,10 +183,10 @@ let velocidade = 10;
 
 nextRound.addEventListener('click', () =>{
     telaOne.style.display = 'none';
-    telaTwo.style.display = 'block'
+    telaTwo.style.display = 'block';
 
+    clearTimeout
     audioStart.play()
-    audio.start.loop(1)
 })
 
 //movimento do personagem
@@ -209,7 +215,7 @@ function atualizarMovimentos(){
     personagem.style.left = posicao + 'px';
     if(posicao < 0){
         posicao = 0;
-    } else if(posicao +larguraPersonagem > larguraCenario){
+    } else if(posicao + larguraPersonagem > larguraCenario){
         posicao = larguraCenario - larguraPersonagem;
     }
 }
@@ -231,29 +237,67 @@ document.addEventListener('keydown', function(event){
 
 //subir nos blocos
 const subirBloco = setInterval(() =>{
+
 const personagemPosition = +window.getComputedStyle(personagem).bottom.replace('px', '');
-const personagemPositionDirecao = personagem.offsetLeft;
+const blockPosition = personagem.offsetLeft;
 const block = document.querySelector('.block')
-//console.log(personagemPositionDirecao)
+//console.log(larguraCenario)
 
 /*if(personagemPosition >90 && personagemPositionDirecao >= 470 && personagemPosition <860){
     personagem.style.bottom = '185px';
 }else if(personagemPositionDirecao > 0 && personagemPosition < 470){
     personagem.style.bottom = '90px';
-}*/if(personagemPosition >= 275 && personagemPositionDirecao > 1100 && personagemPositionDirecao < 1200){
+}*/if(personagemPosition >= 275 && blockPosition > 1100 && blockPosition < 1200){
+    clearInterval(subirBloco);
+    setTimeout(() =>{
+        subirBloco = setInterval(subirBloco, 10);
+    },500);
     block.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
 
     moedasAtual++;
     coinContagemTwo.innerHTML = moedasAtual;
-    pontosAtual++;
+
+    pontosAtual += +10;
     pontos.innerHTML = pontosAtual;
+
     audioUp.play()
 }
 },10);
 
 //moedas 
-const pontos = document.querySelector('.p-conatem-moedas2')
-const coinContagemTwo = document.querySelector('.p-conatem-moedas')
+const pontos = document.querySelector('.p-conatem-moedas2');
+const coinContagemTwo = document.querySelector('.p-conatem-moedas');
+const vida = document.querySelector('.div-vida');
+const tempo = document.querySelector('.time')
+const inimigo = document.querySelector('.inimigo');
 
+let tempoAtual = 400;
 let moedasAtual = 0;
 let pontosAtual = 0;
+let vidaAtual = 5;
+
+/*const colisaoInimigo = setInterval(() =>{
+    const inimigoPosition = inimigo.getBoundingClientRect();
+    const personagemPosition = personagem.getBoundingClientRect();
+    const overlay = document.querySelector('.overlay')
+    if(inimigoPosition.left < personagemPosition.right && inimigoPosition.right > personagemPosition.left && inimigoPosition.top < personagemPosition.bottom){
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioMorto.gif?raw=true';
+        personagem.style.animation = 'none';
+
+        direcao = 0
+        velocidade = 0
+        vida.innerHTML = '<img src="https://www.svgrepo.com/show/398320/skull-and-crossbones.svg" alt="" style="width: 35px; height: 35px; margin-top: 10px;">';
+
+        audioDeath.play()
+        audioJump.volume = '0';
+    }
+},10);*/
+
+function relogio(){
+    tempoAtual--;
+    tempo.textContent = tempoAtual;
+    if(tempoAtual == -100){
+        audioUp.play()
+    }
+}
+setInterval(relogio, 1000);
