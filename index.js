@@ -94,7 +94,7 @@ const loop = setInterval(() =>{
             audioRoundTwo.play()
             audioStart.pause() //audio
             audioCoin.pause()
-        }, 1000)
+        }, 30000)
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';
