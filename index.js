@@ -168,6 +168,9 @@ closeChosenHard.addEventListener('click', function(){
 const telaTwo = document.querySelector('.super-mario-game');
 const personagem = document.querySelector(".mario-two");
 const nextRound = document.querySelector('.div-next-round');
+const block = document.querySelector('.block') ;
+const blockTwo = document.querySelector('.block2');
+const gogumelo =document.querySelector('.gogumelo');
 const larguraCenario = telaOne.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
@@ -175,11 +178,11 @@ audioJump = new Audio("images/audios_audioPulo.wav")
 audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
 audioDeath = new Audio('images/Mario Death - QuickSounds.com.mp3')
 audioTempoAcabando = new Audio('images/hello-mario.mp3')
-audioStartGame = new Audio('images/audios_audioEsperandoIniciarJogo.wav')
+audioStartGame = new Audio('images/audios_audioEsperandoIniciarJogo.mp3')
 
 let posicao = 0;
 let direcao = 0;
-let velocidade = 10;
+let velocidade = 15;
 
 nextRound.addEventListener('click', () =>{
     telaOne.style.display = 'none';
@@ -236,21 +239,11 @@ document.addEventListener('keydown', function(event){
 
 //subir nos blocos
 const subirBloco = setInterval(() =>{
+const personagemPosition = personagem.getBoundingClientRect();;
+const blockPosition = block.getBoundingClientRect();
 
-const personagemPosition = +window.getComputedStyle(personagem).bottom.replace('px', '');
-const blockPosition = personagem.offsetLeft;
-const block = document.querySelector('.block')
-//console.log(larguraCenario)
-
-/*if(personagemPosition >90 && personagemPositionDirecao >= 470 && personagemPosition <860){
-    personagem.style.bottom = '185px';
-}else if(personagemPositionDirecao > 0 && personagemPosition < 470){
-    personagem.style.bottom = '90px';
-}*/if(personagemPosition >= 275 && blockPosition > 1100 && blockPosition < 1200){
+if(blockPosition.left < personagemPosition.right && blockPosition.right > personagemPosition.left && blockPosition.top < personagemPosition.bottom){
     clearInterval(subirBloco);
-    setTimeout(() =>{
-        subirBloco = setInterval(subirBloco, 10);
-    },500);
     block.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
 
     moedasAtual++;
@@ -259,14 +252,57 @@ const block = document.querySelector('.block')
     pontosAtual += +10;
     pontos.innerHTML = pontosAtual;
 
-    audioUp.play()
+    audioCoin.play()
 }
 },10);
+
+//bloco especial
+const baterBloco = setInterval(() =>{
+
+const personagemPositionTwo = personagem.getBoundingClientRect();
+const blockPositionTwo = blockTwo.getBoundingClientRect();
+
+if(blockPositionTwo.left < personagemPositionTwo.right && blockPositionTwo.right > personagemPositionTwo.left && blockPositionTwo.top < personagemPositionTwo.bottom){
+    clearInterval(baterBloco);
+    blockTwo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
+    gogumelo.style.display = 'block';
+
+    moedasAtual++;
+    coinContagemTwo.innerHTML = moedasAtual;
+
+    pontosAtual += +10;
+    pontos.innerHTML = pontosAtual;
+
+    audioCoin.play()
+}
+},10);
+
+//comer cogumelo
+function comerCogumelo(){
+    const cogumeloPosition = gogumelo.getBoundingClientRect();
+    const personagemPosition = personagem.getBoundingClientRect();
+
+    if(cogumeloPosition.left < personagemPosition.right && cogumeloPosition.right > personagemPosition.left){
+        gogumelo.style.display = 'none';
+        personagem.style.width = '65px';
+
+        velocidade = 25;
+        vidaAtual++
+        vida.innerHTML = vidaAtual
+
+        audioUp.play()
+
+        setTimeout(() =>{
+            personagem.style.width = '50px';
+            velocidade = 15;
+        }, 5000);
+    }
+} setInterval(comerCogumelo, 500);
 
 //moedas 
 const pontos = document.querySelector('.p-conatem-moedas2');
 const coinContagemTwo = document.querySelector('.p-conatem-moedas');
-const vida = document.querySelector('.div-vida');
+const vida = document.querySelector('.p-vida');
 const tempo = document.querySelector('.time')
 const inimigo = document.querySelector('.inimigo');
 const gameOverTwo = document.querySelector('.game-over-two');
@@ -293,11 +329,23 @@ const colisaoInimigo = setInterval(() =>{
 
         audioDeath.play()
         audioJump.volume = '0';
-    } /*else if(personagemPosition.bottom < inimigoPosition.top && inimigoPosition.left > personagemPosition.right){
-        inimigo.style.width = '20px';
-        inimigo.style.display = 'none';
-    }*/
+    }
 },10);
+
+function matarInimigo(){
+    const inimigoPosition = inimigo.getBoundingClientRect();
+    const personagemPosition = personagem.getBoundingClientRect();
+    if(inimigoPosition.left < personagemPosition.right && inimigoPosition.right > personagemPosition.left && inimigoPosition.top > personagemPosition.bottom){
+        inimigo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/cogumelo.png?raw=true';
+
+        moedasAtual++;
+        coinContagemTwo.innerHTML = moedasAtual;
+        audioCoin.play()
+
+        inimigo.classList.add('inimigo-animation-death');
+    } 
+}
+setInterval(matarInimigo, 1000);
 
 function relogio(){
     tempoAtual--;

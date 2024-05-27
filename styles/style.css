@@ -5,7 +5,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body{
-    height: 100vh;
+    max-height: 100vh;
+}
+::-webkit-scrollbar{
+    scroll-behavior: smooth;
 }
 
 .mario-game{
@@ -56,10 +59,10 @@ body{
 
 .super-mario{
     position: absolute;
-    top: 10%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%);
-    width: 700px;
+    width: 500px;
     transition: .5s ease;
 }
 
@@ -118,7 +121,7 @@ body{
     position: absolute;
     bottom: 0;
     left: 3%;
-    width: 170px;
+    width: 130px;
 }
 
 .jump{
@@ -146,14 +149,14 @@ body{
 /*botão iniciar*/
 .div-iniciar{
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%);
 }
 
 .div-iniciar button{
     width: 150px;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     background-color: #ff0000;
     border: none;
@@ -175,13 +178,17 @@ body{
 
 .restart{
     display: none;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%);
 }
 /*pipe*/
 .pipe{
     position: absolute;
     bottom: 0;
     right: 5%;
-    width: 80px;
+    width: 70px;
     /*left: 150px;*/
 }
 
@@ -235,7 +242,7 @@ body{
 /*dificuldade*/
 .div-chosen{
     position: absolute;
-    top: 67%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%);
 }
@@ -355,24 +362,41 @@ body{
     z-index: 99999;
 }
 
+@media only screen and (max-height: 1141px){
+    .div-iniciar{
+        top: 60%;
+    }
+    .restart{
+        top: 60%;
+    }
+    .div-chosen{
+        top: 70%;
+    }
+}
+
+@media only screen and (max-height: 880px){
+    .div-iniciar{
+        top: 70%;
+    }
+    .restart{
+        top: 90%;
+    }
+    .div-chosen{
+        top: 80%;
+    }
+}
+
 /*segundo game*/
 .super-mario-game{
     display: none;  
     position: relative;
-    max-width: 100%;
+    max-width: 100vw;
     height: 100vh;
-    overflow: hidden;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
     background-size: 450%;
     background-position: bottom right;
-}
-
-.cenario{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 450%;
+    overflow: hidden;
 }
 
 .ceu{
@@ -380,6 +404,23 @@ body{
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+.ceu2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.part-two{
+    position: absolute;
+    left: 99%;
+    width: 100%;
+    height: 100%;
+    background: url("../images/cenario-game-two.png");
+    background-repeat: no-repeat;
+    background-size: 450%;
+    background-position: bottom right;
 }
 
 .mario-two{
@@ -394,9 +435,13 @@ body{
     position: absolute;
     bottom: 90px;
     right: 5%;
-    width: 35px;
+    width: 40px;
     object-fit: cover;
     animation: inimigo-animation 18s infinite linear;
+}
+
+.inimigo-animation-death{
+    animation: inimigo-morte 1s ease forwards;
 }
 
 .block{
@@ -405,6 +450,24 @@ body{
     left: 55%;
     width: 55px;
     object-fit: cover;
+}
+
+.block2{
+    position: absolute;
+    top: 65%;
+    left: 57.5%;
+    width: 55px;
+    object-fit: cover;
+}
+
+.gogumelo{
+    display: none;
+    position: absolute;
+    top: 61.8%;
+    left: 57.5%;
+    width: 40px;
+    object-fit: cover;
+    animation: gogulemo-animation 1s ease forwards;
 }
 
 /*hud*/
@@ -534,5 +597,31 @@ body{
     }
     to{
         right: 105%;
+    }
+}
+
+@keyframes inimigo-morte{
+    from{
+        bottom: 90px;
+    }
+    to{
+        bottom: 0;
+    }
+}
+
+@keyframes gogulemo-animation {
+    0%{
+        left: 57.5%;
+    }
+    50%{
+        left: 61%;
+    }
+    70%{
+        left: 61%;
+        top: 61.8%;
+    }
+    100%{
+        left: 61%;
+        top: 88.8%;
     }
 }
