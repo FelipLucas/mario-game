@@ -208,7 +208,7 @@ const nextRound = document.querySelector('.div-next-round');
 const block = document.querySelector('.block') ;
 const blockTwo = document.querySelector('.block2');
 const gogumelo =document.querySelector('.gogumelo');
-//const larguraCenario = telaTwo.offsetWidth;
+const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
 audioJump = new Audio("images/audios_audioPulo.wav")
@@ -298,7 +298,7 @@ const baterBloco = setInterval(() =>{
 
 const personagemPosition = personagem.getBoundingClientRect();
 const blockPositionTwo = blockTwo.getBoundingClientRect();
-console.log(blockPositionTwo)
+//telaOne.log(blockPositionTwo)
 
 if(blockPositionTwo.left < personagemPosition.right && blockPositionTwo.right > personagemPosition.left && blockPositionTwo.top < personagemPosition.bottom && blockPositionTwo.bottom> personagemPosition.top){
     clearInterval(baterBloco);
