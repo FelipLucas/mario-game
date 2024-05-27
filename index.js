@@ -242,7 +242,7 @@ const subirBloco = setInterval(() =>{
 const personagemPosition = personagem.getBoundingClientRect();;
 const blockPosition = block.getBoundingClientRect();
 
-if(blockPosition.left < personagemPosition.right && blockPosition.right > personagemPosition.left && blockPosition.top < personagemPosition.bottom){
+if(blockPosition.left < personagemPosition.right && blockPosition.right > personagemPosition.left && blockPosition.top < personagemPosition.bottom && blockPosition.bottom > personagemPosition.top){
     clearInterval(subirBloco);
     block.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
 
@@ -259,10 +259,11 @@ if(blockPosition.left < personagemPosition.right && blockPosition.right > person
 //bloco especial
 const baterBloco = setInterval(() =>{
 
-const personagemPositionTwo = personagem.getBoundingClientRect();
+const personagemPosition = personagem.getBoundingClientRect();
 const blockPositionTwo = blockTwo.getBoundingClientRect();
+console.log(blockPositionTwo)
 
-if(blockPositionTwo.left < personagemPositionTwo.right && blockPositionTwo.right > personagemPositionTwo.left && blockPositionTwo.top < personagemPositionTwo.bottom){
+if(blockPositionTwo.left < personagemPosition.right && blockPositionTwo.right > personagemPosition.left && blockPositionTwo.top < personagemPosition.bottom && blockPositionTwo.bottom> personagemPosition.top){
     clearInterval(baterBloco);
     blockTwo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
     gogumelo.style.display = 'block';
@@ -295,7 +296,7 @@ function comerCogumelo(){
         setTimeout(() =>{
             personagem.style.width = '50px';
             velocidade = 15;
-        }, 5000);
+        }, 7000);
     }
 } setInterval(comerCogumelo, 500);
 
@@ -340,12 +341,13 @@ function matarInimigo(){
 
         moedasAtual++;
         coinContagemTwo.innerHTML = moedasAtual;
+
         audioCoin.play()
 
         inimigo.classList.add('inimigo-animation-death');
     } 
 }
-setInterval(matarInimigo, 1000);
+setInterval(matarInimigo, 10);
 
 function relogio(){
     tempoAtual--;

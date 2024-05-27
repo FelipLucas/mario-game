@@ -413,6 +413,7 @@ body{
 }
 
 .part-two{
+    display: none;
     position: absolute;
     left: 99%;
     width: 100%;
@@ -565,6 +566,15 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
+}
+
+/*restart*/
+.restart-two{
+    display: none;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 @keyframes jump2{
