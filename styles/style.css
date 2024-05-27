@@ -6,7 +6,6 @@
 }
 body{
     max-height: 100vh;
-    overflow-y: hidden;
 }
 ::-webkit-scrollbar{
     scroll-behavior: smooth;
@@ -400,6 +399,7 @@ body{
     background-repeat: no-repeat;
     background-size: 450%;
     background-position: bottom right;
+    overflow : hidden;
 }
 
 .ceu{
