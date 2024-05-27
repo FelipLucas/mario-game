@@ -1,6 +1,7 @@
 const mario = document.querySelector('.mario');
 const marioSuper = document.querySelector('.super-mario');
 const pipe = document.querySelector('.pipe'); 
+const turtle = document.querySelector('.turtle')
 const start = document.querySelector('.div-iniciar');   
 const restart = document.querySelector('.restart');
 const gameOver = document.querySelector('.game-over');  
@@ -50,10 +51,24 @@ document.addEventListener('keydown', function(event){
     }
 })
 
+//abaixar
+function teclaPressionadaBaixo(event){
+    if(event.key === "ArrowDown"){
+        mario.src = 'https://media.tenor.com/XLTgWDwKXvAAAAAi/super-bad-mario-down-pose.gif';
+        mario.style.width = '70px';
+        setTimeout(() =>{
+            mario.src = 'images/mario.gif';
+            mario.style.width = '130px';
+        },500)
+    }
+} document.addEventListener('keydown', teclaPressionadaBaixo);
+
 //loop
 const loop = setInterval(() =>{
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+    const marioPositionAbaixar = mario.offsetWidth;
+    const turtlePosition = turtle.offsetLeft;
 
     const coin = document.querySelector('.div-coin');
     const coinContagem = document.querySelector('.p-contagem');
@@ -64,16 +79,32 @@ const loop = setInterval(() =>{
         pipe.classList.remove('pipe-animation');
         pipe.style.left = `${pipePosition}px`;
 
+        turtle.classList.remove('turtle-animation');
+
         mario.style.animation = 'none';
         mario.style.bottom = `${marioPosition}px`;
         mario.src = 'images/game-over.png';
-        mario.style.width = '80px';
+        mario.style.width = '60px';
         
         gameOver.style.display = 'block';
         audioStart.pause()
         audioGameOver.play()
 
         restart.style.display = 'block';
+    } else if(turtlePosition <= 150 && turtlePosition > 0 && marioPositionAbaixar > 80){
+        pipe.classList.remove('pipe-animation');
+        pipe.style.left = `${turtlePosition}px`;
+
+        turtle.classList.remove('turtle-animation');
+
+        mario.style.animation = 'none';
+        mario.style.bottom = `${marioPosition}px`;
+        mario.src = 'images/game-over.png';
+        mario.style.width = '60px';
+        
+        gameOver.style.display = 'block';
+        audioStart.pause()
+        audioGameOver.play()
     }
     if(pipePosition > 150 && pipePosition > 0 && marioPosition > 80){
         setTimeout(() =>{
@@ -134,10 +165,14 @@ closeChosenEasy.addEventListener('click', function(){
 
 //mediun
 closeChosenMedium.addEventListener('click', function(){
+    points.style.display = 'block';
     selectDifficult.style.display = 'none';
     choseDifficult.classList.remove('abrir-dificuldades');
 
-    pipe.classList.add('pipe-animationM')
+    pipe.classList.add('pipe-animationM');
+    setTimeout(() =>{
+        turtle.classList.add('turtle-animation');
+    }, 10000)
 
     start.style.display = 'none';
 
@@ -145,11 +180,13 @@ closeChosenMedium.addEventListener('click', function(){
     marioSuper.style.left = '7%';
     marioSuper.style.width = '200px';
 
+
     audioStart.play() //audio
 })
 
 //hard
 closeChosenHard.addEventListener('click', function(){
+    points.style.display = 'block';
     selectDifficult.style.display = 'none';
     choseDifficult.classList.remove('abrir-dificuldades');
 
@@ -171,7 +208,7 @@ const nextRound = document.querySelector('.div-next-round');
 const block = document.querySelector('.block') ;
 const blockTwo = document.querySelector('.block2');
 const gogumelo =document.querySelector('.gogumelo');
-const larguraCenario = telaOne.offsetWidth;
+//const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
 audioJump = new Audio("images/audios_audioPulo.wav")
@@ -282,6 +319,9 @@ if(blockPositionTwo.left < personagemPosition.right && blockPositionTwo.right > 
 function comerCogumelo(){
     const cogumeloPosition = gogumelo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
+    setTimeout(() =>{
+        gogumelo.style.display = 'none';
+    },7000)
 
     if(cogumeloPosition.left < personagemPosition.right && cogumeloPosition.right > personagemPosition.left){
         gogumelo.style.display = 'none';
@@ -337,8 +377,13 @@ function matarInimigo(){
     const inimigoPosition = inimigo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
     if(inimigoPosition.left < personagemPosition.right && inimigoPosition.right > personagemPosition.left && inimigoPosition.top > personagemPosition.bottom){
-        inimigo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/cogumelo.png?raw=true';
-
+        inimigo.src = 'https://media.tenor.com/3sXzkGext5gAAAAi/super-bad-mario-kick.gif';
+        inimigo.style.width = '100px';
+        mario.src = '';
+        setTimeout(() =>{
+            inimigo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/cogumelo.png?raw=true';
+            inimigo.style.width = '30px';
+        }, 1000)
         moedasAtual++;
         coinContagemTwo.innerHTML = moedasAtual;
 
@@ -347,7 +392,7 @@ function matarInimigo(){
         inimigo.classList.add('inimigo-animation-death');
     } 
 }
-setInterval(matarInimigo, 10);
+setInterval(matarInimigo, 500);
 
 function relogio(){
     tempoAtual--;
