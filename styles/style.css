@@ -585,7 +585,7 @@ body{
 /*boss*/
 .boss{
     position: absolute;
-    right: 23%;
+    right: 20%;
     bottom: 17%;
     width: 200px;
     object-fit: cover;
