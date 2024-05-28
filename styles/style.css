@@ -6,13 +6,14 @@
 }
 body{
     max-height: 100vh;
+    overflow-y: hidden;
 }
 ::-webkit-scrollbar{
     scroll-behavior: smooth;
 }
 
 .mario-game{
-    display: block;
+    display: none;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -391,7 +392,7 @@ body{
 
 /*segundo game*/
 .super-mario-game{
-    display: none;  
+    display: block;  
     position: relative;
     max-width: 100vw;
     height: 100vh;
@@ -399,7 +400,6 @@ body{
     background-repeat: no-repeat;
     background-size: 450%;
     background-position: bottom right;
-    overflow : hidden;
 }
 
 .ceu{
@@ -417,14 +417,15 @@ body{
 
 .part-two{
     display: block;
-    position: absolute;
+    position: relative;
     left: 99%;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
     background-size: 450%;
     background-position: bottom left;
+    overflow: hidden;
 }
 
 .mario-two{
@@ -581,6 +582,15 @@ body{
     transform: translate(-50%);
 }
 
+/*boss*/
+.boss{
+    position: absolute;
+    right: 23%;
+    bottom: 17%;
+    width: 200px;
+    object-fit: cover;
+}
+
 @keyframes jump2{
     0%{
         bottom: 90px;
@@ -619,7 +629,7 @@ body{
         bottom: 90px;
     }
     to{
-        bottom: 5%;
+        bottom: 3%;
     }
 }
 
@@ -632,7 +642,7 @@ body{
     }
     70%{
         left: 61%;
-        top: 61.8%;
+        top: 62%;
     }
     100%{
         left: 61%;

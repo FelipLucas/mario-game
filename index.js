@@ -208,7 +208,7 @@ const nextRound = document.querySelector('.div-next-round');
 const block = document.querySelector('.block') ;
 const blockTwo = document.querySelector('.block2');
 const gogumelo =document.querySelector('.gogumelo');
-const larguraCenario = telaOne.offsetWidth;
+//const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
 audioJump = new Audio("images/audios_audioPulo.wav")
