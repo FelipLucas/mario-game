@@ -207,7 +207,9 @@ const personagem = document.querySelector(".mario-two");
 const nextRound = document.querySelector('.div-next-round');
 const block = document.querySelector('.block') ;
 const blockTwo = document.querySelector('.block2');
+const blockFour = document.querySelector('.block4');
 const gogumelo =document.querySelector('.gogumelo');
+const star = document.querySelector('.star')
 //const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
 
@@ -254,16 +256,16 @@ function atualizarMovimentos(){
     personagem.style.left = posicao + 'px';
     if(posicao < 0){
         posicao = 0;
-    } else if(posicao + larguraPersonagem > larguraCenario){
+    } /*else if(posicao + larguraPersonagem > larguraCenario){
         posicao = larguraCenario - larguraPersonagem;
-    }
+    }*/
 }
 document.addEventListener('keydown', teclaPressionada);
 document.addEventListener('keyup', teclaSolta);
 setInterval(atualizarMovimentos, 50);
 
 document.addEventListener('keydown', function(event){
-    if(event.key === "ArrowUp"){
+    if(event.code === "Space"){
         personagem.classList.add('jump2')
         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioOlhandoParaCimaLadoDireito.png?raw=true';
         audioJump.play()
@@ -315,10 +317,33 @@ if(blockPositionTwo.left < personagemPosition.right && blockPositionTwo.right > 
 }
 },10);
 
+const baterBlocoFour = setInterval(() =>{
+
+    const personagemPosition = personagem.getBoundingClientRect();
+    const blockPositionFour = blockFour.getBoundingClientRect();
+    //telaOne.log(blockPositionTwo)
+    
+    if(blockPositionFour.left < personagemPosition.right && blockPositionFour.right > personagemPosition.left && blockPositionFour.top < personagemPosition.bottom && blockPositionFour.bottom> personagemPosition.top){
+        clearInterval(baterBloco);
+        blockTwo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
+        star.style.display = 'block';
+    
+        moedasAtual++;
+        coinContagemTwo.innerHTML = moedasAtual;
+    
+        pontosAtual += +10;
+        pontos.innerHTML = pontosAtual;
+    
+        audioCoin.play()
+    }
+},10)
+;
 //comer cogumelo
 function comerCogumelo(){
     const cogumeloPosition = gogumelo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
+
+    const starPosition = star.getBoundingClientRect();
     setTimeout(() =>{
         gogumelo.style.display = 'none';
     },7000)
@@ -336,6 +361,23 @@ function comerCogumelo(){
         setTimeout(() =>{
             personagem.style.width = '50px';
             velocidade = 15;
+        }, 7000);
+    }else if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left){
+        star.style.display = 'none';
+        personagem.style.width = '200px';
+        personagem.src = 'https://media.tenor.com/Yi1KpZShPK8AAAAi/penguin-madness-combat.gif';
+
+        vidaAtual++;
+        vida.innerHTML = vidaAtual;
+
+        velocidade = 0;
+
+        audioUp.play()
+
+        setTimeout(() =>{
+            personagem.style.width = '50px';
+            personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+            velocidade = 25;
         }, 7000);
     }
 } setInterval(comerCogumelo, 500);
@@ -420,3 +462,37 @@ function pararTeclas(){
     document.removeEventListener('keydown', teclaPressionada)
     document.removeEventListener('keydown', teclaSolta)
 }
+
+/*movimento da câmera*/
+(function(){
+    var cnv = document.querySelector('canvas');
+    var ctx = cnv.getContext('2d')
+
+    //recursos
+    var backgroud = telaTwo;
+    function loop(){
+        window.requestAnimationFrame(loop, cnv);
+        uptade();
+        render();
+    }
+    function uptade(){
+
+    }
+    function render(){
+        ctx.drawImage(backgroud, 0, 0, 10, 900, 0, 0, 10, 900);
+    }
+    loop();
+})
+
+//part boss
+const subir = setInterval(() =>{
+    const personagemPosition  = personagem.getBoundingClientRect();
+    const telaBoss = document.querySelector('.bloco-teste');
+    const telaBossResolucao = telaBoss.getBoundingClientRect();
+    console.log(personagemPosition)
+    if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
+        personagem.style.bottom = '185px';
+    }else{
+        personagem.style.bottom = '90px';
+    }
+},10);

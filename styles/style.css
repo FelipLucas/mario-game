@@ -11,6 +11,12 @@ body{
 ::-webkit-scrollbar{
     scroll-behavior: smooth;
 }
+::-webkit-scrollbar-thumb{
+    background: #979755;
+}
+::-webkit-scrollbar-track{
+    background: #979755;
+}
 
 .mario-game{
     display: none;
@@ -466,6 +472,30 @@ body{
     object-fit: cover;
 }
 
+.block3{
+    position: absolute;
+    top: 65%;
+    left: 47.35%;
+    width: 55px;
+    object-fit: cover;
+}
+
+.block4{
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    width: 55px;
+    object-fit: cover;
+}
+
+.block5{
+    position: absolute;
+    top: 65%;
+    left: 44.62%;
+    width: 55px;
+    object-fit: cover;
+}
+
 .gogumelo{
     display: none;
     position: absolute;
@@ -480,7 +510,7 @@ body{
 .div-hud{
     position: absolute;
     top: 5%;
-    left: 20%;
+    left: 17%;
     margin: 0 auto;
     width: 100%;
 }
@@ -511,6 +541,26 @@ body{
     font-size: 40px;
 }
 
+.coin-two2{
+    position: absolute;
+    top: 7.5%;
+    right: 19%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coin-two2 p:first-child{
+    color: #ffe032;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 40px;
+}
+
+.coin-two2 p:last-child{
+    color: #ffffff;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 40px;
+}
 
 /*vida*/
 .div-vida{
@@ -527,6 +577,25 @@ body{
 }
 
 .p-vida{
+    font-family: "Silkscreen", sans-serif;
+    font-size: 35px;
+    color: #ffffff;
+}
+
+.div-vida2{
+    position: absolute;
+    top: 10.3%;
+    left: 27%;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.div-vida2 svg{
+    margin-top: 8px;
+}
+
+.p-vida2{
     font-family: "Silkscreen", sans-serif;
     font-size: 35px;
     color: #ffffff;
@@ -552,7 +621,16 @@ body{
 .time{
     position: absolute;
     top: 10%;
-    right: 35.3%;
+    right: 38.3%;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 40px;
+    color: #ffec80;
+}
+
+.time2{
+    position: absolute;
+    top: 10%;
+    right: 38.3%;
     font-family: "Silkscreen", sans-serif;
     font-size: 40px;
     color: #ffec80;
@@ -561,6 +639,10 @@ body{
 /*animação jump*/
 .jump2{
     animation: jump2 500ms ease-out;
+}
+
+.jump3{
+    animation: jump3 500ms ease-out;
 }
 
 /*gameOver*/
@@ -591,6 +673,44 @@ body{
     object-fit: cover;
 }
 
+/*cage*/
+.div-cage{
+    position: absolute;
+    top: 0%;
+    right: -2%;
+}
+
+.cage{
+    position: relative;
+    width: 450px;
+}
+.princess{
+    position: absolute;
+    top: 62%;
+    left: 42.7%;
+    width: 80px;
+}
+
+.bloco-teste{
+    position: absolute;
+    left: 29.3%;
+    bottom: 95px;
+    width: 507px;
+    height: 93px;
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+.star{
+    display: none;
+    position: absolute;
+    top: 61.8%;
+    left: 50.5%;
+    width: 40px;
+    object-fit: cover;
+    animation: gogulemo-animation 1s ease forwards;
+}
+
 @keyframes jump2{
     0%{
         bottom: 90px;
@@ -612,6 +732,29 @@ body{
     }
     100%{
         bottom: 90px;
+    }
+}
+@keyframes jump3{
+    0%{
+        bottom: 185px;
+    }
+    40%{
+        bottom: 300px;
+    }
+    50%{
+        bottom: 300px;
+    }
+    60%{
+        bottom: 300px;
+    }
+    70%{
+        bottom: 300px;
+    }
+    80%{
+        bottom: 300px;
+    }
+    100%{
+        bottom: 185px;
     }
 }
 
