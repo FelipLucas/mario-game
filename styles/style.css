@@ -711,6 +711,39 @@ body{
     animation: gogulemo-animation 1s ease forwards;
 }
 
+/*vida iniigo*/
+.form-vida-inimigo{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 600px;
+    height: 40px;
+    background-color: #000000;
+}
+
+.form-vida-inimigo div{
+    width: 100%;
+    height: 100%;
+    background-color: #ff0000;
+}
+.form-vida-inimigo p{
+    margin-top: 10px;
+    text-align: center;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.ataque-mario{
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff0000;
+}
+
 @keyframes jump2{
     0%{
         bottom: 90px;
@@ -779,6 +812,23 @@ body{
 @keyframes gogulemo-animation {
     0%{
         left: 57.5%;
+    }
+    50%{
+        left: 61%;
+    }
+    70%{
+        left: 61%;
+        top: 62%;
+    }
+    100%{
+        left: 61%;
+        top: 88.8%;
+    }
+}
+
+@keyframes star-animation {
+    0%{
+        left: 50.5%;
     }
     50%{
         left: 61%;
