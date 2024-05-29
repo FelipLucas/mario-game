@@ -343,7 +343,6 @@ function comerCogumelo(){
     const cogumeloPosition = gogumelo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
 
-    const starPosition = star.getBoundingClientRect();
     setTimeout(() =>{
         gogumelo.style.display = 'none';
     },7000)
@@ -362,7 +361,14 @@ function comerCogumelo(){
             personagem.style.width = '50px';
             velocidade = 15;
         }, 7000);
-    }else if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left){
+    }
+} setInterval(comerCogumelo, 500);
+
+function comerEstrela(){
+    const personagemPosition = personagem.getBoundingClientRect();
+    const starPosition = star.getBoundingClientRect();
+
+    if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left){
         star.style.display = 'none';
         personagem.style.width = '200px';
         personagem.src = 'https://media.tenor.com/Yi1KpZShPK8AAAAi/penguin-madness-combat.gif';
@@ -375,12 +381,13 @@ function comerCogumelo(){
         audioUp.play()
 
         setTimeout(() =>{
-            personagem.style.width = '50px';
-            personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+            clearInterval(comerEstrela,10)
+            personagem.style.width = '100px';
+            personagem.src = 'https://media.tenor.com/JU0r-sla_AkAAAAi/ultra-m-old.gif';
             velocidade = 25;
-        }, 7000);
+        }, 1000);
     }
-} setInterval(comerCogumelo, 500);
+} setInterval(comerEstrela, 500)
 
 //moedas 
 const pontos = document.querySelector('.p-conatem-moedas2');
@@ -396,7 +403,7 @@ let pontosAtual = 0;
 let vidaAtual = 5;
 
 //colisao inimigo
-const colisaoInimigo = setInterval(() =>{
+/*const colisaoInimigo = setInterval(() =>{
     const inimigoPosition = inimigo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
     const overlay = document.querySelector('.overlay')
@@ -413,7 +420,7 @@ const colisaoInimigo = setInterval(() =>{
         audioDeath.play()
         audioJump.volume = '0';
     }
-},10);
+},10);*/
 
 function matarInimigo(){
     const inimigoPosition = inimigo.getBoundingClientRect();
@@ -461,6 +468,13 @@ checarRelogio = setInterval(relogio, 1000);
 function pararTeclas(){
     document.removeEventListener('keydown', teclaPressionada)
     document.removeEventListener('keydown', teclaSolta)
+}
+
+/*efeito poder mario*/
+function ataque(event){
+    if(event.code === 'KeyQ'){
+        
+    }
 }
 
 /*movimento da câmera*/
