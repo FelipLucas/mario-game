@@ -743,6 +743,10 @@ body{
     top: 50%;
     width: 20px;
     height: 20px;
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: #ff0000;
 }
