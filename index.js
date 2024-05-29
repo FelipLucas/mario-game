@@ -218,6 +218,8 @@ audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
 audioDeath = new Audio('images/Mario Death - QuickSounds.com.mp3')
 audioTempoAcabando = new Audio('images/hello-mario.mp3')
 audioStartGame = new Audio('images/audios_audioEsperandoIniciarJogo.mp3')
+audioAtaque = new Audio('images/silenced-gunshot-81063.mp3')
+audioLaught = new Audio('images/evil-laugh-89423.mp3')
 
 let posicao = 0;
 let direcao = 0;
@@ -264,7 +266,7 @@ document.addEventListener('keydown', teclaPressionada);
 document.addEventListener('keyup', teclaSolta);
 setInterval(atualizarMovimentos, 50);
 
-document.addEventListener('keydown', function(event){
+function jump(event){
     if(event.code === "Space"){
         personagem.classList.add('jump2')
         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioOlhandoParaCimaLadoDireito.png?raw=true';
@@ -274,8 +276,19 @@ document.addEventListener('keydown', function(event){
             personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
         },500)
     }
-});
+} document.addEventListener('keydown', jump)
 
+function jump2(event){
+    if(event.code === "Space"){
+        personagem.classList.add('jump3')
+        personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioOlhandoParaCimaLadoDireito.png?raw=true';
+        audioJump.play()
+        setTimeout(() =>{
+            personagem.classList.remove('jump3')
+            personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+        },500)
+    }
+} document.removeEventListener('keydown', jump2)
 //subir nos blocos
 const subirBloco = setInterval(() =>{
 const personagemPosition = personagem.getBoundingClientRect();;
@@ -343,7 +356,6 @@ function comerCogumelo(){
     const cogumeloPosition = gogumelo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
 
-    const starPosition = star.getBoundingClientRect();
     setTimeout(() =>{
         gogumelo.style.display = 'none';
     },7000)
@@ -362,7 +374,15 @@ function comerCogumelo(){
             personagem.style.width = '50px';
             velocidade = 15;
         }, 7000);
-    }else if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left){
+    }
+} setInterval(comerCogumelo, 500);
+
+//comer estrela
+function comerEstrela(){
+    const personagemPosition = personagem.getBoundingClientRect();
+    const starPosition = star.getBoundingClientRect();
+
+    if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left){
         star.style.display = 'none';
         personagem.style.width = '200px';
         personagem.src = 'https://media.tenor.com/Yi1KpZShPK8AAAAi/penguin-madness-combat.gif';
@@ -375,12 +395,14 @@ function comerCogumelo(){
         audioUp.play()
 
         setTimeout(() =>{
-            personagem.style.width = '50px';
-            personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+            clearInterval(comerEstrela,10)
+            personagem.style.width = '100px';
+            personagem.src = 'https://media.tenor.com/JU0r-sla_AkAAAAi/ultra-m-old.gif';
+
             velocidade = 25;
-        }, 7000);
+        }, 1000);
     }
-} setInterval(comerCogumelo, 500);
+} setInterval(comerEstrela, 500)
 
 //moedas 
 const pontos = document.querySelector('.p-conatem-moedas2');
@@ -396,7 +418,7 @@ let pontosAtual = 0;
 let vidaAtual = 5;
 
 //colisao inimigo
-const colisaoInimigo = setInterval(() =>{
+/*const colisaoInimigo = setInterval(() =>{
     const inimigoPosition = inimigo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
     const overlay = document.querySelector('.overlay')
@@ -413,7 +435,7 @@ const colisaoInimigo = setInterval(() =>{
         audioDeath.play()
         audioJump.volume = '0';
     }
-},10);
+},10);*/
 
 function matarInimigo(){
     const inimigoPosition = inimigo.getBoundingClientRect();
@@ -463,6 +485,24 @@ function pararTeclas(){
     document.removeEventListener('keydown', teclaSolta)
 }
 
+/*efeito poder mario*/
+function ataque(event){
+    const ataqueMario = document.querySelector('.ataque-mario')
+    const personagemPosition  = personagem.getBoundingClientRect();
+    const telaBoss = document.querySelector('.bloco-teste');
+    const telaBossResolucao = telaBoss.getBoundingClientRect();
+
+    if(event.code === 'KeyQ' && telaBossResolucao.left < personagemPosition.right){
+        ataqueMario.style.display =  'block';
+        ataqueMario.classList.add('ataque-mario-animation');
+        audioAtaque.play()
+    }
+    setTimeout(() =>{
+        ataqueMario.style.display =  'none';
+        ataqueMario.classList.remove('ataque-mario-animation');
+    },500)
+} document.addEventListener('keydown', ataque);
+
 /*movimento da câmera*/
 (function(){
     var cnv = document.querySelector('canvas');
@@ -489,8 +529,20 @@ const subir = setInterval(() =>{
     const personagemPosition  = personagem.getBoundingClientRect();
     const telaBoss = document.querySelector('.bloco-teste');
     const telaBossResolucao = telaBoss.getBoundingClientRect();
-    console.log(personagemPosition)
+    const vidaInimigo = document.querySelector('.form-vida-inimigo');
+    const flowerInimigo = document.querySelector('.boss')
+    const cage = document.querySelector('.div-cage')
+
     if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
+        vidaInimigo.style.display = 'block';
+
+        flowerInimigo.style.display = 'block';
+
+        cage.style.display = 'block';
+
+        document.addEventListener('keydown', jump2)
+        document.removeEventListener('keydown', jump)
+
         personagem.style.bottom = '185px';
     }else{
         personagem.style.bottom = '90px';
