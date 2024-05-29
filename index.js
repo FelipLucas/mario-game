@@ -212,6 +212,7 @@ const gogumelo =document.querySelector('.gogumelo');
 const star = document.querySelector('.star')
 //const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
+personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
 
 audioJump = new Audio("images/audios_audioPulo.wav")
 audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
@@ -241,6 +242,25 @@ function teclaPressionada(event){
         direcao = -1;
         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoEsquerdo.gif?raw=true';
     } 
+
+}
+function teclaPressionadaBoss(event){
+    if(event.key === "ArrowRight"){
+        direcao = 1;
+        personagem.src = 'https://media.tenor.com/HcAfAfuQQlIAAAAi/mx-powerdown-fnf.gif';
+    } else if(event.key === "ArrowLeft"){
+        direcao = -1;
+        personagem.src = 'https://media.tenor.com/HcAfAfuQQlIAAAAi/mx-powerdown-fnf.gif';
+    } 
+}
+function teclaSoltaBoss(event){
+    if(event.key === "ArrowRight"){
+        direcao = 0;
+        personagem.src = 'https://media.tenor.com/NJ1Z5ymf5S8AAAAi/mx-powerdown-fnf.gif';
+    } else if(event.key === "ArrowLeft"){
+        direcao = 0;
+        personagem.src = 'https://media.tenor.com/NJ1Z5ymf5S8AAAAi/mx-powerdown-fnf.gif';
+    } 
 }
 
 function teclaSolta(event){
@@ -263,7 +283,9 @@ function atualizarMovimentos(){
     }*/
 }
 document.addEventListener('keydown', teclaPressionada);
+document.removeEventListener('keydown', teclaPressionadaBoss);
 document.addEventListener('keyup', teclaSolta);
+document.removeEventListener('keyup', teclaSoltaBoss);
 setInterval(atualizarMovimentos, 50);
 
 function jump(event){
@@ -289,6 +311,18 @@ function jump2(event){
         },500)
     }
 } document.removeEventListener('keydown', jump2)
+
+function jump3(event){
+    if(event.code === "Space"){
+        personagem.classList.add('jump4')
+        personagem.src = 'https://media.tenor.com/NJ1Z5ymf5S8AAAAi/mx-powerdown-fnf.gif';
+        audioJump.play()
+        setTimeout(() =>{
+            personagem.classList.remove('jump4')
+            personagem.src = 'https://media.tenor.com/NJ1Z5ymf5S8AAAAi/mx-powerdown-fnf.gif';
+        },650)
+    }
+} document.removeEventListener('keydown', jump3)
 //subir nos blocos
 const subirBloco = setInterval(() =>{
 const personagemPosition = personagem.getBoundingClientRect();;
@@ -337,8 +371,8 @@ const baterBlocoFour = setInterval(() =>{
     //telaOne.log(blockPositionTwo)
     
     if(blockPositionFour.left < personagemPosition.right && blockPositionFour.right > personagemPosition.left && blockPositionFour.top < personagemPosition.bottom && blockPositionFour.bottom> personagemPosition.top){
-        clearInterval(baterBloco);
-        blockTwo.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
+        clearInterval(baterBlocoFour);
+        blockFour.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/blocoVazio.png?raw=true';
         star.style.display = 'block';
     
         moedasAtual++;
@@ -393,13 +427,23 @@ function comerEstrela(){
         velocidade = 0;
 
         audioUp.play()
+        
 
         setTimeout(() =>{
             clearInterval(comerEstrela,10)
+            document.addEventListener('keydown', jump3)
+            document.removeEventListener('keydown', jump)
+
+            document.removeEventListener('keydown', teclaPressionada);
+            document.addEventListener('keydown', teclaPressionadaBoss);
+
+            document.removeEventListener('keyup', teclaSolta);
+            document.addEventListener('keyup', teclaSoltaBoss);
+
             personagem.style.width = '100px';
             personagem.src = 'https://media.tenor.com/JU0r-sla_AkAAAAi/ultra-m-old.gif';
 
-            velocidade = 25;
+            velocidade = 30;
         }, 1000);
     }
 } setInterval(comerEstrela, 500)
@@ -495,13 +539,34 @@ function ataque(event){
     if(event.code === 'KeyQ' && telaBossResolucao.left < personagemPosition.right){
         ataqueMario.style.display =  'block';
         ataqueMario.classList.add('ataque-mario-animation');
-        audioAtaque.play()
-    }
+        audioAtaque.play();
+    } 
     setTimeout(() =>{
         ataqueMario.style.display =  'none';
         ataqueMario.classList.remove('ataque-mario-animation');
     },500)
-} document.addEventListener('keydown', ataque);
+
+} document.addEventListener('keydown', ataque); 
+
+
+function danoInimigo(){
+    //dano inimigo
+    const ataqueMario = document.querySelector('.ataque-mario')
+    const ataqueMarioPosition = ataqueMario.getBoundingClientRect();
+    const flowerInimigo = document.querySelector('.boss')
+    const bossPosition = flowerInimigo.getBoundingClientRect();
+    const vidaInimigo = document.querySelector('.form-vida-inimigo')
+    const vidaInimigoPorcentagem = document.querySelector('.div-vida-inimigo');
+
+    //console.log(bossPosition)
+
+    if(bossPosition.left < ataqueMarioPosition.right){
+        vidaInimigoPorcentagem.style.width -= '90%';
+    }
+    setTimeout(() =>{
+        vidaInimigoPorcentagem.style.width -= '80%';
+    },500)
+} setInterval(danoInimigo, 10);
 
 /*movimento da câmera*/
 (function(){
@@ -531,19 +596,22 @@ const subir = setInterval(() =>{
     const telaBossResolucao = telaBoss.getBoundingClientRect();
     const vidaInimigo = document.querySelector('.form-vida-inimigo');
     const flowerInimigo = document.querySelector('.boss')
+    const ataqueBoss = document.querySelector('.ataque-boss')
     const cage = document.querySelector('.div-cage')
 
     if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
         vidaInimigo.style.display = 'block';
-
         flowerInimigo.style.display = 'block';
 
         cage.style.display = 'block';
+
+        ataqueBoss.style.display = 'block';
 
         document.addEventListener('keydown', jump2)
         document.removeEventListener('keydown', jump)
 
         personagem.style.bottom = '185px';
+        audioLaught.play()
     }else{
         personagem.style.bottom = '90px';
     }

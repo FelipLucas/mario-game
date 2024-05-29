@@ -644,6 +644,10 @@ body{
     animation: jump3 500ms ease-out;
 }
 
+.jump4{
+    animation: jump4 650ms ease-out;
+}
+
 /*gameOver*/
 .game-over-two{
     display: none;
@@ -724,7 +728,7 @@ body{
     background-color: #000000;
 }
 
-.form-vida-inimigo div{
+.div-vida-inimigo{
     width: 100%;
     height: 100%;
     background-color: #ff0000;
@@ -740,19 +744,28 @@ body{
 .ataque-mario{
     display: none;
     position: absolute;
-    top: 50%;
+    top: 70%;
     width: 20px;
     height: 20px;
-    position: absolute;
-    top: 50%;
-    width: 10px;
-    height: 10px;
     border-radius: 50%;
-    background-color: #ff0000;
+    background-color: #0e0d0d;
 }
 
 .ataque-mario-animation{
-    animation: ataque-mario 1s ease;
+    animation: ataque-mario 500ms infinite;
+}
+
+/*ataque boss*/
+.ataque-boss{
+    display: none;
+    position: absolute;
+    right: 27%;
+    bottom: 20%;
+    width: 0px;
+    height: 15px;
+    transform: rotate(170deg);
+    background-color: #ff0000;
+    animation: laser 2.5s ease;
 }
 
 @keyframes jump2{
@@ -796,6 +809,35 @@ body{
     }
     80%{
         bottom: 300px;
+    }
+    100%{
+        bottom: 185px;
+    }
+}
+@keyframes jump4{
+    0%{
+        bottom: 185px;
+    }
+    30%{
+        bottom: 500px;
+    }
+    40%{
+        bottom: 500px;
+    }
+    50%{
+        bottom: 500px;
+    }
+    60%{
+        bottom: 500px;
+    }
+    70%{
+        bottom: 500px;
+    }
+    80%{
+        bottom: 500px;
+    }
+    90%{
+        bottom: 500px;
     }
     100%{
         bottom: 185px;
@@ -856,9 +898,20 @@ body{
 
 @keyframes ataque-mario {
     from{
-        left: 59%;
+        left: 39%;
     }
     to{
-        right: 72%;
+        left: 73.5%;
+    }
+}
+
+@keyframes laser {
+    0%{
+        width: 0px;
+        transform: rotate(170deg);
+    }
+    100%{
+        width: 800px;
+        transform: rotate(170deg);
     }
 }
