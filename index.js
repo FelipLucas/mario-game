@@ -457,7 +457,8 @@ const tempo = document.querySelector('.time');
 const inimigo = document.querySelector('.inimigo');
 const gameOverTwo = document.querySelector('.game-over-two');
 const flowerInimigo = document.querySelector('.boss');
-const ataqueBoss = document.querySelector('.ataque-mario');
+const ataqueBoss = document.querySelector('.ataque-boss');
+const ataqueMario = document.querySelector('.ataque-mario');
 const vidaInimigo = document.querySelector('.form-vida-inimigo');
 const vidaPorcentagem = document.querySelector('.div-vida-inimigo');
 const cage = document.querySelector('.div-cage');
@@ -537,7 +538,6 @@ function pararTeclas(){
 
 /*efeito poder mario*/
 function ataque(event){
-    const ataqueMario = document.querySelector('.ataque-mario')
     const personagemPosition  = personagem.getBoundingClientRect();
     const telaBoss = document.querySelector('.bloco-teste');
     const telaBossResolucao = telaBoss.getBoundingClientRect();
@@ -594,6 +594,10 @@ const subir = setInterval(() =>{
 
         personagem.style.bottom = '185px';
         audioLaught.play()
+
+        setTimeout(() =>{
+            flowerInimigo.src = '';
+        },5000)
     }else{
         personagem.style.bottom = '90px';
     }
@@ -601,7 +605,7 @@ const subir = setInterval(() =>{
 
 const danoInimigo = setInterval(() =>{
     const bossPosition = flowerInimigo.getBoundingClientRect();
-    const ataqueBossPosition = ataqueBoss.getBoundingClientRect();
+    const ataqueBossPosition = ataqueMario.getBoundingClientRect();
 
     if(bossPosition.left < ataqueBossPosition.right){
         vidaPorcentagem.style.width = '90%';

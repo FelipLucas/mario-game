@@ -766,7 +766,7 @@ body{
     height: 15px;
     transform: rotate(170deg);
     background-color: #ff0000;
-    animation: laser 2.5s ease;
+    animation: laser 2.5s 5s ease;
 }
 
 @keyframes jump2{
