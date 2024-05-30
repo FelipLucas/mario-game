@@ -745,6 +745,7 @@ body{
     display: none;
     position: absolute;
     top: 70%;
+    left: 39%;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -901,7 +902,7 @@ body{
         left: 39%;
     }
     to{
-        left: 73.5%;
+        left: 74%;
     }
 }
 

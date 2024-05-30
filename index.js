@@ -382,6 +382,7 @@ const baterBlocoFour = setInterval(() =>{
         pontos.innerHTML = pontosAtual;
     
         audioCoin.play()
+        audioUp.play()
     }
 },10)
 ;
@@ -452,9 +453,14 @@ function comerEstrela(){
 const pontos = document.querySelector('.p-conatem-moedas2');
 const coinContagemTwo = document.querySelector('.p-conatem-moedas');
 const vida = document.querySelector('.p-vida');
-const tempo = document.querySelector('.time')
+const tempo = document.querySelector('.time');
 const inimigo = document.querySelector('.inimigo');
 const gameOverTwo = document.querySelector('.game-over-two');
+const flowerInimigo = document.querySelector('.boss');
+const ataqueBoss = document.querySelector('.ataque-mario');
+const vidaInimigo = document.querySelector('.form-vida-inimigo');
+const vidaPorcentagem = document.querySelector('.div-vida-inimigo');
+const cage = document.querySelector('.div-cage');
 
 let tempoAtual = 400;
 let moedasAtual = 0;
@@ -548,26 +554,6 @@ function ataque(event){
 
 } document.addEventListener('keydown', ataque); 
 
-
-function danoInimigo(){
-    //dano inimigo
-    const ataqueMario = document.querySelector('.ataque-mario')
-    const ataqueMarioPosition = ataqueMario.getBoundingClientRect();
-    const flowerInimigo = document.querySelector('.boss')
-    const bossPosition = flowerInimigo.getBoundingClientRect();
-    const vidaInimigo = document.querySelector('.form-vida-inimigo')
-    const vidaInimigoPorcentagem = document.querySelector('.div-vida-inimigo');
-
-    //console.log(bossPosition)
-
-    if(bossPosition.left < ataqueMarioPosition.right){
-        vidaInimigoPorcentagem.style.width -= '90%';
-    }
-    setTimeout(() =>{
-        vidaInimigoPorcentagem.style.width -= '80%';
-    },500)
-} setInterval(danoInimigo, 10);
-
 /*movimento da câmera*/
 (function(){
     var cnv = document.querySelector('canvas');
@@ -594,10 +580,6 @@ const subir = setInterval(() =>{
     const personagemPosition  = personagem.getBoundingClientRect();
     const telaBoss = document.querySelector('.bloco-teste');
     const telaBossResolucao = telaBoss.getBoundingClientRect();
-    const vidaInimigo = document.querySelector('.form-vida-inimigo');
-    const flowerInimigo = document.querySelector('.boss')
-    const ataqueBoss = document.querySelector('.ataque-boss')
-    const cage = document.querySelector('.div-cage')
 
     if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
         vidaInimigo.style.display = 'block';
@@ -616,3 +598,16 @@ const subir = setInterval(() =>{
         personagem.style.bottom = '90px';
     }
 },10);
+
+const danoInimigo = setInterval(() =>{
+    const bossPosition = flowerInimigo.getBoundingClientRect();
+    const ataqueBossPosition = ataqueBoss.getBoundingClientRect();
+
+    if(bossPosition.left < ataqueBossPosition.right){
+        vidaPorcentagem.style.width = '90%';
+
+        setInterval(() =>{
+            vidaPorcentagem.style.width = '90%';
+        },500)
+    }
+}, 10);
