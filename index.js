@@ -221,6 +221,9 @@ audioTempoAcabando = new Audio('images/hello-mario.mp3')
 audioStartGame = new Audio('images/audios_audioEsperandoIniciarJogo.mp3')
 audioAtaque = new Audio('images/silenced-gunshot-81063.mp3')
 audioLaught = new Audio('images/evil-laugh-89423.mp3')
+audioLaser = new Audio('images/laser-audio.mp3')
+audioBoss = new Audio('images/despair-metal.mp3')
+audioBoss.volume = '0.5';
 
 let posicao = 0;
 let direcao = 0;
@@ -428,7 +431,7 @@ function comerEstrela(){
         velocidade = 0;
 
         audioUp.play()
-        
+        audioBoss.play()
 
         setTimeout(() =>{
             clearInterval(comerEstrela,10)
@@ -588,16 +591,19 @@ const subir = setInterval(() =>{
         cage.style.display = 'block';
 
         ataqueBoss.style.display = 'block';
+        ataqueBoss.classList.add('ataque-boss-animation');
 
         document.addEventListener('keydown', jump2)
         document.removeEventListener('keydown', jump)
 
         personagem.style.bottom = '185px';
-        audioLaught.play()
+
+        audioLaught.play();
 
         setTimeout(() =>{
-            flowerInimigo.src = '';
-        },5000)
+            ataqueBoss.classList.remove('ataque-boss-animation');
+            ataqueBoss.classList.add('ataque-boss-animation2')
+        },7000)
     }else{
         personagem.style.bottom = '90px';
     }

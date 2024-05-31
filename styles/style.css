@@ -671,9 +671,9 @@ body{
 .boss{
     display: none;
     position: absolute;
-    right: 20%;
+    right: 17%;
     bottom: 17%;
-    width: 200px;
+    width: 350px;
     object-fit: cover;
 }
 
@@ -744,7 +744,7 @@ body{
 .ataque-mario{
     display: none;
     position: absolute;
-    top: 70%;
+    top: 60%;
     left: 39%;
     width: 20px;
     height: 20px;
@@ -760,13 +760,20 @@ body{
 .ataque-boss{
     display: none;
     position: absolute;
-    right: 27%;
-    bottom: 20%;
+    right: 27.5%;
+    bottom: 30%;
     width: 0px;
     height: 15px;
     transform: rotate(170deg);
     background-color: #ff0000;
-    animation: laser 2.5s 5s ease;
+}
+
+.ataque-boss-animation{
+    animation: laser 2.5s 5s ease forwards;
+}
+
+.ataque-boss-animation2{
+    animation: laser2 5s ease;
 }
 
 @keyframes jump2{
@@ -912,7 +919,46 @@ body{
         transform: rotate(170deg);
     }
     100%{
-        width: 800px;
+        width: 900px;
+        transform: rotate(170deg);
+    }
+}
+
+@keyframes laser2 {
+    0%{
+        width: 900px;
+        transform: rotate(170deg);
+    }
+    30%{
+        width: 900px;
+        transform: rotate(160deg);
+    }
+    40%{
+        width: 900px;
+        transform: rotate(150deg);
+    }
+    50%{
+        width: 900px;
+        transform: rotate(160deg);
+    }
+    60%{
+        width: 900px;
+        transform: rotate(170deg);
+    }
+    70%{
+        width: 900px;
+        transform: rotate(180deg);
+    }
+    80%{
+        width: 900px;
+        transform: rotate(190deg);
+    }
+    90%{
+        width: 900px;
+        transform: rotate(180deg);
+    }
+    100%{
+        width: 900px;
         transform: rotate(170deg);
     }
 }
