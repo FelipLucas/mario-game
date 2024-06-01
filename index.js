@@ -612,12 +612,9 @@ const subir = setInterval(() =>{
 const danoInimigo = setInterval(() =>{
     const bossPosition = flowerInimigo.getBoundingClientRect();
     const ataqueBossPosition = ataqueMario.getBoundingClientRect();
+    const vidaPorcentagemsWidth = vidaPorcentagem.offsetWidth;
 
-    if(bossPosition.left < ataqueBossPosition.right){
+    if(vidaPorcentagemsWidth <= 600 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueBossPosition.right){
         vidaPorcentagem.style.width = '90%';
-
-        setInterval(() =>{
-            vidaPorcentagem.style.width = '90%';
-        },500)
     }
 }, 10);
