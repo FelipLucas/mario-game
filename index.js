@@ -5,7 +5,6 @@ const turtle = document.querySelector('.turtle')
 const start = document.querySelector('.div-iniciar');   
 const restart = document.querySelector('.restart');
 const gameOver = document.querySelector('.game-over');  
-const telaOne = document.querySelector('.mario-game');
 
 audioStart = new Audio('images/goons-electronic-march-video-game-rpg-trolls-ogres-orcs-attack-145267.mp3')
 audioFala = new Audio('images/mario-fala.mp3')
@@ -202,7 +201,6 @@ closeChosenHard.addEventListener('click', function(){
 })
 
 //next round
-const telaTwo = document.querySelector('.super-mario-game');
 const personagem = document.querySelector(".mario-two");
 const nextRound = document.querySelector('.div-next-round');
 const block = document.querySelector('.block') ;
@@ -210,9 +208,14 @@ const blockTwo = document.querySelector('.block2');
 const blockFour = document.querySelector('.block4');
 const gogumelo =document.querySelector('.gogumelo');
 const star = document.querySelector('.star')
-//const larguraCenario = telaTwo.offsetWidth;
 const larguraPersonagem = personagem.offsetWidth;
+const telaTwo = document.querySelector('.super-mario-game');
+const telaThree = document.querySelector('.part-two');
+const larguraCenario = telaThree.getBoundingClientRect();
+const primeiraTelaLargura = telaTwo.offsetWidth;
+const body = document.querySelector('.body');
 personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+
 
 audioJump = new Audio("images/audios_audioPulo.wav")
 audioUp = new Audio("images/Super Mario Bros. 1-Up - QuickSounds.com.mp3")
@@ -245,7 +248,6 @@ function teclaPressionada(event){
         direcao = -1;
         personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoEsquerdo.gif?raw=true';
     } 
-
 }
 function teclaPressionadaBoss(event){
     if(event.key === "ArrowRight"){
@@ -277,13 +279,24 @@ function teclaSolta(event){
 }
 
 function atualizarMovimentos(){
+    const personagemPosition = personagem.getBoundingClientRect();
+
     posicao += direcao * velocidade;
     personagem.style.left = posicao + 'px';
     if(posicao < 0){
         posicao = 0;
-    } /*else if(posicao + larguraPersonagem > larguraCenario){
-        posicao = larguraCenario - larguraPersonagem;
-    }*/
+    } else if(posicao + larguraPersonagem > 4000){
+        posicao = 4000 - larguraPersonagem;
+    }
+    else if(posicao + larguraPersonagem > 3000  && posicao + larguraPersonagem > primeiraTelaLargura){
+        posicao = primeiraTelaLargura - larguraPersonagem;
+    }
+    else if(posicao + personagemPosition.left >= 2300){
+        body.style.overflow = 'hidden';
+    } else if(posicao + personagemPosition.left >= 2000){
+        body.style.overflow = 'visible';
+        body.style.overflowY = 'hidden';
+    }
 }
 document.addEventListener('keydown', teclaPressionada);
 document.removeEventListener('keydown', teclaPressionadaBoss);
@@ -328,7 +341,7 @@ function jump3(event){
 } document.removeEventListener('keydown', jump3)
 //subir nos blocos
 const subirBloco = setInterval(() =>{
-const personagemPosition = personagem.getBoundingClientRect();;
+const personagemPosition = personagem.getBoundingClientRect();
 const blockPosition = block.getBoundingClientRect();
 
 if(blockPosition.left < personagemPosition.right && blockPosition.right > personagemPosition.left && blockPosition.top < personagemPosition.bottom && blockPosition.bottom > personagemPosition.top){
@@ -350,7 +363,6 @@ const baterBloco = setInterval(() =>{
 
 const personagemPosition = personagem.getBoundingClientRect();
 const blockPositionTwo = blockTwo.getBoundingClientRect();
-//telaOne.log(blockPositionTwo)
 
 if(blockPositionTwo.left < personagemPosition.right && blockPositionTwo.right > personagemPosition.left && blockPositionTwo.top < personagemPosition.bottom && blockPositionTwo.bottom> personagemPosition.top){
     clearInterval(baterBloco);
@@ -420,7 +432,7 @@ function comerEstrela(){
     const personagemPosition = personagem.getBoundingClientRect();
     const starPosition = star.getBoundingClientRect();
 
-    if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left){
+    if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left && personagemPosition.top < starPosition.bottom){
         star.style.display = 'none';
         personagem.style.width = '200px';
         personagem.src = 'https://media.tenor.com/Yi1KpZShPK8AAAAi/penguin-madness-combat.gif';
@@ -450,7 +462,7 @@ function comerEstrela(){
             velocidade = 30;
         }, 1000);
     }
-} setInterval(comerEstrela, 500)
+}
 
 //moedas 
 const pontos = document.querySelector('.p-conatem-moedas2');
@@ -461,15 +473,24 @@ const inimigo = document.querySelector('.inimigo');
 const gameOverTwo = document.querySelector('.game-over-two');
 const flowerInimigo = document.querySelector('.boss');
 const ataqueBoss = document.querySelector('.ataque-boss');
-const ataqueMario = document.querySelector('.ataque-mario');
 const vidaInimigo = document.querySelector('.form-vida-inimigo');
 const vidaPorcentagem = document.querySelector('.div-vida-inimigo');
 const cage = document.querySelector('.div-cage');
+const hud = document.querySelector('.div-hud');
 
 let tempoAtual = 400;
 let moedasAtual = 0;
 let pontosAtual = 0;
 let vidaAtual = 5;
+let estaAtirando = false;
+
+function ganharVidaComMoedas(){
+    clearInterval(ganharVidaComMoedas)
+    if(moedasAtual === 20){
+        vidaAtual++
+        vida.innerHTML = vidaAtual;
+    }
+} setInterval(ganharVidaComMoedas, 10);
 
 //colisao inimigo
 /*const colisaoInimigo = setInterval(() =>{
@@ -508,7 +529,9 @@ function matarInimigo(){
         audioCoin.play()
 
         inimigo.classList.add('inimigo-animation-death');
-    } 
+    } else if (inimigoPosition.bottom < 90){
+        clearInterval(matarInimigo, 10);
+    }
 }
 setInterval(matarInimigo, 500);
 
@@ -540,25 +563,40 @@ function pararTeclas(){
 }
 
 /*efeito poder mario*/
-function ataque(event){
-    const personagemPosition  = personagem.getBoundingClientRect();
-    const telaBoss = document.querySelector('.bloco-teste');
-    const telaBossResolucao = telaBoss.getBoundingClientRect();
+const criaTiro = (posicaoLeftPersonagem, posicaoRightPersonagem) =>{
+    const tiro = document.createElement("div");
+    tiro.className = 'ataque-mario';
+    tiro.style.position = 'absolute';
+    tiro.style.width = '20px';
+    tiro.style.height = '20px';
+    tiro.style.borderRadius = '50%';
+    tiro.style.backgroundColor = '#0e0d0d;';
+    tiro.style.left = posicaoLeftPersonagem + 'px';
+    tiro.style.right = posicaoRightPersonagem + 'px';
+    larguraCenario.appendChild(tiro);
+}
 
-    if(event.code === 'KeyQ' && telaBossResolucao.left < personagemPosition.right){
-        ataqueMario.style.display =  'block';
-        ataqueMario.classList.add('ataque-mario-animation');
-        audioAtaque.play();
-    } 
-    setTimeout(() =>{
-        ataqueMario.style.display =  'none';
-        ataqueMario.classList.remove('ataque-mario-animation');
-    },500)
+const atirar = () =>{
+    if(estaAtirando){
+        criaTiros(posicao +45);
+    }
+};
 
-} document.addEventListener('keydown', ataque); 
+document.addEventListener('keydown', (event) =>{
+    if(event.code === 'KeyQ'){
+        atirar();
+        atirando = true;
+    }
+});
+
+document.addEventListener("keyup", (event) =>{
+    if(event.code === 'KeyUp'){
+        atirando = false;
+    }
+})
 
 /*movimento da câmera*/
-(function(){
+/*(function(){
     var cnv = document.querySelector('canvas');
     var ctx = cnv.getContext('2d')
 
@@ -576,7 +614,7 @@ function ataque(event){
         ctx.drawImage(backgroud, 0, 0, 10, 900, 0, 0, 10, 900);
     }
     loop();
-})
+})*/
 
 //part boss
 const subir = setInterval(() =>{
@@ -585,6 +623,9 @@ const subir = setInterval(() =>{
     const telaBossResolucao = telaBoss.getBoundingClientRect();
 
     if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
+        setInterval(comerEstrela, 500)
+        setInterval(atirar, 10);
+
         vidaInimigo.style.display = 'block';
         flowerInimigo.style.display = 'block';
 
@@ -598,6 +639,9 @@ const subir = setInterval(() =>{
 
         personagem.style.bottom = '185px';
 
+        hud.style.width = '83%';
+        hud.style.left = '117%';
+        
         audioLaught.play();
 
         setTimeout(() =>{
@@ -611,10 +655,11 @@ const subir = setInterval(() =>{
 
 const danoInimigo = setInterval(() =>{
     const bossPosition = flowerInimigo.getBoundingClientRect();
-    const ataqueBossPosition = ataqueMario.getBoundingClientRect();
     const vidaPorcentagemsWidth = vidaPorcentagem.offsetWidth;
 
-    if(vidaPorcentagemsWidth <= 600 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueBossPosition.right){
-        vidaPorcentagem.style.width = '90%';
-    }
+    /*if(vidaPorcentagemsWidth == 600 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueBossPosition.right){
+        vidaPorcentagem.style.width = "550px";
+    } if(vidaPorcentagemsWidth == 550 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueBossPosition.right){
+        vidaPorcentagem.style.width = "550px";
+    } */
 }, 10);

@@ -7,7 +7,7 @@
     <script src="index.js" defer></script>
     <title>Mario world</title>
 </head>
-<body>
+<body class="body">
     <canvas width="100vw" height="100vh"></canvas>
     <div class="mario-game">
         <img src="images/clouds.png" alt="" class="clouds">
@@ -70,20 +70,22 @@
         <img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/cogumelo.png?raw=true" alt="" class="gogumelo">
         <img src="https://www.svgrepo.com/show/122736/game-over.svg" alt="" class="game-over-two">
         <div class="div-hud">
-            <img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/menuDoJogo.png?raw=true" alt="" class="hud">
-        </div>
-        <div class="time">
-            400
-        </div>
-        <div class="coin-two">
-            <p class="p-conatem-moedas">0</p>
-            <p class="p-conatem-moedas2">0</p>
-        </div>
-        <div class="div-vida">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
-            </svg>
-            <p class="p-vida">5</p>
+            <div class="div-align-hud">
+                <img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/menuDoJogo.png?raw=true" alt="" class="hud">
+                <div class="time">
+                    400
+                </div>
+                <div class="coin-two">
+                    <p class="p-conatem-moedas">0</p>
+                    <p class="p-conatem-moedas2">0</p>
+                </div>
+                <div class="div-vida">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+                    </svg>
+                    <p class="p-vida">5</p>
+                </div>
+            </div>
         </div>
         <div class="overlay"></div>
         <div class="part-two">
@@ -97,29 +99,31 @@
                 <img src="https://svgsilh.com/png-1024/1094927.png" alt="" class="cage">
                 <img src="images/princess.gif" alt="" class="princess">
             </div>
-            <div class="div-hud">
-                <img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/menuDoJogo.png?raw=true" alt="" class="hud">
-            </div>
+            <!--<div class="div-hud second">
+                <div class="div-align-hud">
+                    <img src="https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/menuDoJogo.png?raw=true" alt="" class="hud">
+                    <div class="time">
+                        400
+                    </div>
+                    <div class="coin-two">
+                        <p class="p-conatem-moedas">0</p>
+                        <p class="p-conatem-moedas2">0</p>
+                    </div>
+                    <div class="div-vida">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+                        </svg>
+                        <p class="p-vida">5</p>
+                    </div>
+                </div>
+            </div>-->
             <img src="https://www.svgrepo.com/show/122736/game-over.svg" alt="" class="game-over-two">
-            <div class="time2">
-                400
-            </div>
-            <div class="coin-two2">
-                <p class="p-conatem-moedas2">0</p>
-                <p class="p-conatem-moedas3">0</p>
-            </div>
-            <div class="div-vida2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
-            </svg>
-                <p class="p-vida2">5</p>
-            </div>
+
             <div class="bloco-teste"></div>
             <div class="form-vida-inimigo">
                 <div class="div-vida-inimigo"></div>
                 <p>Shit Flower</p>
             </div>
-            <div class="ataque-mario"></div>
             <div class="ataque-boss"></div>
         </div>
     </div>

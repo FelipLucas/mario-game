@@ -6,6 +6,7 @@
 }
 body{
     max-height: 100vh;
+    overflow: hidden;
 }
 ::-webkit-scrollbar{
     scroll-behavior: smooth;
@@ -401,6 +402,7 @@ body{
     position: relative;
     max-width: 100vw;
     height: 100vh;
+    margin-top: -5%;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
     background-size: 450%;
@@ -409,12 +411,14 @@ body{
 
 .ceu{
     position: absolute;
+    top: 0%;
     width: 100%;
     height: 100%;
     z-index: -1;
 }
 .ceu2{
     position: absolute;
+    top: 0%;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -423,12 +427,13 @@ body{
 .part-two{
     display: block;
     position: relative;
-    left: 99%;
-    width: 100vw;
+    left: 99.5%;
+    max-width: 100vw;
     height: 100%;
+    margin-top: -5%;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
-    background-size: 450%;
+    background-size: 460%;
     background-position: bottom left;
     overflow: hidden;
 }
@@ -498,11 +503,12 @@ body{
 .gogumelo{
     display: none;
     position: absolute;
-    top: 61.8%;
-    left: 57.5%;
+    top: 65%;
+    left: 57.77%;
     width: 40px;
     object-fit: cover;
-    animation: gogulemo-animation 1s ease forwards;
+    animation: gogulemo-animation 2s ease forwards;
+    z-index: -1;
 }
 
 /*hud*/
@@ -514,6 +520,19 @@ body{
     width: 100%;
 }
 
+.div-hud2{
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 17%;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.div-align-hud{
+    position: relative;
+}
+
 .hud{
     width: 65%;
 }
@@ -521,8 +540,8 @@ body{
 /*coin*/
 .coin-two{
     position: absolute;
-    top: 7.5%;
-    right: 19%;
+    top: 17%;
+    right: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -540,32 +559,11 @@ body{
     font-size: 40px;
 }
 
-.coin-two2{
-    position: absolute;
-    top: 7.5%;
-    right: 19%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.coin-two2 p:first-child{
-    color: #ffe032;
-    font-family: "Silkscreen", sans-serif;
-    font-size: 40px;
-}
-
-.coin-two2 p:last-child{
-    color: #ffffff;
-    font-family: "Silkscreen", sans-serif;
-    font-size: 40px;
-}
-
 /*vida*/
 .div-vida{
     position: absolute;
-    top: 10.3%;
-    left: 27%;
+    top: 43%;
+    left: 7%;
     display: flex;
     align-items: center;
     gap: .5rem;
@@ -576,25 +574,6 @@ body{
 }
 
 .p-vida{
-    font-family: "Silkscreen", sans-serif;
-    font-size: 35px;
-    color: #ffffff;
-}
-
-.div-vida2{
-    position: absolute;
-    top: 10.3%;
-    left: 27%;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-}
-
-.div-vida2 svg{
-    margin-top: 8px;
-}
-
-.p-vida2{
     font-family: "Silkscreen", sans-serif;
     font-size: 35px;
     color: #ffffff;
@@ -619,17 +598,8 @@ body{
 /*tempo*/
 .time{
     position: absolute;
-    top: 10%;
-    right: 38.3%;
-    font-family: "Silkscreen", sans-serif;
-    font-size: 40px;
-    color: #ffec80;
-}
-
-.time2{
-    position: absolute;
-    top: 10%;
-    right: 38.3%;
+    top: 43%;
+    right: 55%;
     font-family: "Silkscreen", sans-serif;
     font-size: 40px;
     color: #ffec80;
@@ -694,6 +664,7 @@ body{
     top: 62%;
     left: 42.7%;
     width: 80px;
+    z-index: -1;
 }
 
 .bloco-teste{
@@ -709,11 +680,12 @@ body{
 .star{
     display: none;
     position: absolute;
-    top: 61.8%;
-    left: 50.5%;
+    top: 60%;
+    left: 50.3%;
     width: 40px;
     object-fit: cover;
-    animation: gogulemo-animation 1s ease forwards;
+    z-index: -1;
+    animation: star-animation 2.5s ease forwards;
 }
 
 /*vida iniigo*/
@@ -739,21 +711,6 @@ body{
     font-family: "Silkscreen", sans-serif;
     font-size: 20px;
     color: #ffffff;
-}
-
-.ataque-mario{
-    display: none;
-    position: absolute;
-    top: 60%;
-    left: 39%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #0e0d0d;
-}
-
-.ataque-mario-animation{
-    animation: ataque-mario 500ms infinite;
 }
 
 /*ataque boss*/
@@ -872,35 +829,40 @@ body{
 
 @keyframes gogulemo-animation {
     0%{
-        left: 57.5%;
+        top: 65%;
+        left: 57.77%;
     }
     50%{
-        left: 61%;
+        top: 61.8%;
+        left: 57.77%;
     }
     70%{
+        top: 61.8%;
         left: 61%;
-        top: 62%;
+        z-index: 1;
     }
     100%{
-        left: 61%;
         top: 88.8%;
+        left: 61%;
+        z-index: 1;
     }
 }
 
 @keyframes star-animation {
     0%{
-        left: 50.5%;
+        top: 65%;
     }
     50%{
-        left: 61%;
+        top: 61.8%;
+        left: 50.3%;
     }
     70%{
-        left: 61%;
-        top: 62%;
+        top: 61.8%;
+        left: 53%;
     }
     100%{
-        left: 61%;
-        top: 88.8%;
+        top: 80.8%;
+        left: 53%;
     }
 }
 
