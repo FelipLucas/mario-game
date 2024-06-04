@@ -19,7 +19,7 @@ body{
 }
 
 .mario-game{
-    display: none;
+    display: block;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -398,11 +398,11 @@ body{
 
 /*segundo game*/
 .super-mario-game{
-    display: block;  
+    display: none;  
     position: relative;
     max-width: 100vw;
     height: 100vh;
-    margin-top: -5%;
+    margin-top: 0%;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
     background-size: 450%;
@@ -413,14 +413,14 @@ body{
     position: absolute;
     top: 0%;
     width: 100%;
-    height: 120%;
+    height: 100%;
     z-index: -1;
 }
 .ceu2{
     position: absolute;
     top: 0%;
     width: 100%;
-    height: 110%;
+    height: 100%;
     z-index: -1;
 }
 
@@ -430,10 +430,10 @@ body{
     left: 99.5%;
     max-width: 100vw;
     height: 100%;
-    margin-top: -5%;
+    margin-top: -5px;
     background: url("../images/cenario-game-two.png");
     background-repeat: no-repeat;
-    background-size: 460%;
+    background-size: 450%;
     background-position: bottom left;
     overflow: hidden;
 }
@@ -733,8 +733,20 @@ body{
     animation: laser2 5s ease;
 }
 
-.atack{
-    display: none;
+.ataque-mario{
+    display: block;
+}
+
+.ataque-mario{
+    display: none;    
+    position: absolute;
+    top: 65%;
+    left: 40%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #0e0d0d;
+    animation: ataque-mario-animation 1s forwards;
 }
 
 @keyframes jump2{
@@ -870,12 +882,12 @@ body{
     }
 }
 
-@keyframes ataque-mario {
-    from{
-        left: 39%;
+@keyframes ataque-mario-animation {
+    0%{
+        left: 30%;
     }
-    to{
-        left: 74%;
+    100%{
+        left: 75%;
     }
 }
 

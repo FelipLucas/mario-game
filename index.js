@@ -124,7 +124,7 @@ const loop = setInterval(() =>{
             audioRoundTwo.play()
             audioStart.pause() //audio
             audioCoin.pause()
-        }, 30000)
+        }, 1000)
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';
@@ -210,6 +210,7 @@ const gogumelo =document.querySelector('.gogumelo');
 const star = document.querySelector('.star')
 const larguraPersonagem = personagem.offsetWidth;
 const telaTwo = document.querySelector('.super-mario-game');
+const telaOne = document.querySelector('.mario-game');
 const telaThree = document.querySelector('.part-two');
 const larguraCenario = telaThree.getBoundingClientRect();
 const primeiraTelaLargura = telaTwo.offsetWidth;
@@ -289,9 +290,9 @@ function atualizarMovimentos(){
         posicao = 4000 - larguraPersonagem;
     }
     else if(posicao + personagemPosition.left >= 2300){
-        body.style.overflow = 'hidden';
-    } else if(posicao + personagemPosition.left >= 2250){
-        body.style.overflow = 'visible';
+        body.style.overflowX = 'hidden';
+    } else if(posicao + personagemPosition.left >= 2000){
+        body.style.overflowX = 'visible';
         body.style.overflowY = 'hidden';
     }
 }
@@ -490,7 +491,7 @@ function ganharVidaComMoedas(){
 } setInterval(ganharVidaComMoedas, 10);
 
 //colisao inimigo
-/*const colisaoInimigo = setInterval(() =>{
+const colisaoInimigo = setInterval(() =>{
     const inimigoPosition = inimigo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
     const overlay = document.querySelector('.overlay')
@@ -507,7 +508,7 @@ function ganharVidaComMoedas(){
         audioDeath.play()
         audioJump.volume = '0';
     }
-},10);*/
+},10);
 
 function matarInimigo(){
     const inimigoPosition = inimigo.getBoundingClientRect();
@@ -559,41 +560,6 @@ function pararTeclas(){
     document.removeEventListener('keydown', teclaSolta)
 }
 
-/*efeito poder mario*/
-const criaTiro = (posicaoLeftPersonagem, posicaoRightPersonagem) =>{
-    const tiro = document.createElement("div");
-    const bum = document.querySelector('.atack')
-    bum.style.display = 'block'
-    tiro.className = 'ataque-mario';
-    tiro.style.position = 'absolute';
-    tiro.style.width = '20px';
-    tiro.style.height = '20px';
-    tiro.style.borderRadius = '50%';
-    tiro.style.backgroundColor = '#0e0d0d;';
-    tiro.style.left = posicaoLeftPersonagem + 'px';
-    tiro.style.right = posicaoRightPersonagem + 'px';
-    larguraCenario.appendChild(tiro);
-}
-
-const atirar = () =>{
-    if(estaAtirando){
-        criaTiros(posicao + 1);
-    }
-};
-
-document.addEventListener('keydown', (event) =>{
-    if(event.code === 'KeyQ'){
-        atirar();
-        estaAtirando = true;
-    }
-});
-
-document.addEventListener("keyup", (event) =>{
-    if(event.code === 'KeyUp'){
-        estaAtirando = false;
-    }
-})
-
 /*movimento da câmera*/
 /*(function(){
     var cnv = document.querySelector('canvas');
@@ -620,10 +586,11 @@ const subir = setInterval(() =>{
     const personagemPosition  = personagem.getBoundingClientRect();
     const telaBoss = document.querySelector('.bloco-teste');
     const telaBossResolucao = telaBoss.getBoundingClientRect();
+   
 
     if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
-        setInterval(comerEstrela, 500)
-        setInterval(atirar, 10);
+        setInterval(comerEstrela, 500);
+        document.addEventListener('keydown', ataque);
 
         vidaInimigo.style.display = 'block';
         flowerInimigo.style.display = 'block';
@@ -639,7 +606,7 @@ const subir = setInterval(() =>{
         personagem.style.bottom = '185px';
 
         hud.style.width = '83%';
-        hud.style.left = '117%';
+        hud.style.left = '115%';
         
         audioLaught.play();
 
@@ -649,16 +616,31 @@ const subir = setInterval(() =>{
         },7000)
     }else{
         personagem.style.bottom = '90px';
-    }
+    } 
 },10);
+
+function ataque(event){
+    const personagemPosition  = personagem.getBoundingClientRect();
+    const tiro = document.querySelector('.ataque-mario');
+
+    if(event.code === 'KeyQ'){
+        tiro.style.display = 'block';
+    }
+    setTimeout(() =>{
+        tiro.style.display = 'none';
+    }, 1500)
+}
+document.removeEventListener('keydown', ataque);
 
 const danoInimigo = setInterval(() =>{
     const bossPosition = flowerInimigo.getBoundingClientRect();
     const vidaPorcentagemsWidth = vidaPorcentagem.offsetWidth;
+    const tiro = document.querySelector('.ataque-mario');
+    const ataqueMarioPosition = tiro.getBoundingClientRect();
 
-    /*if(vidaPorcentagemsWidth == 600 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueBossPosition.right){
+    if(vidaPorcentagemsWidth == 600 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueMarioPosition.right){
         vidaPorcentagem.style.width = "550px";
-    } if(vidaPorcentagemsWidth == 550 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueBossPosition.right){
+    } if(vidaPorcentagemsWidth == 550 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueMarioPosition.right){
         vidaPorcentagem.style.width = "550px";
-    } */
+    } 
 }, 10);
