@@ -413,14 +413,14 @@ body{
     position: absolute;
     top: 0%;
     width: 100%;
-    height: 100%;
+    height: 120%;
     z-index: -1;
 }
 .ceu2{
     position: absolute;
     top: 0%;
     width: 100%;
-    height: 100%;
+    height: 110%;
     z-index: -1;
 }
 
@@ -731,6 +731,10 @@ body{
 
 .ataque-boss-animation2{
     animation: laser2 5s ease;
+}
+
+.atack{
+    display: none;
 }
 
 @keyframes jump2{

@@ -288,12 +288,9 @@ function atualizarMovimentos(){
     } else if(posicao + larguraPersonagem > 4000){
         posicao = 4000 - larguraPersonagem;
     }
-    else if(posicao + larguraPersonagem > 3000  && posicao + larguraPersonagem > primeiraTelaLargura){
-        posicao = primeiraTelaLargura - larguraPersonagem;
-    }
     else if(posicao + personagemPosition.left >= 2300){
         body.style.overflow = 'hidden';
-    } else if(posicao + personagemPosition.left >= 2000){
+    } else if(posicao + personagemPosition.left >= 2250){
         body.style.overflow = 'visible';
         body.style.overflowY = 'hidden';
     }
@@ -565,6 +562,8 @@ function pararTeclas(){
 /*efeito poder mario*/
 const criaTiro = (posicaoLeftPersonagem, posicaoRightPersonagem) =>{
     const tiro = document.createElement("div");
+    const bum = document.querySelector('.atack')
+    bum.style.display = 'block'
     tiro.className = 'ataque-mario';
     tiro.style.position = 'absolute';
     tiro.style.width = '20px';
@@ -578,20 +577,20 @@ const criaTiro = (posicaoLeftPersonagem, posicaoRightPersonagem) =>{
 
 const atirar = () =>{
     if(estaAtirando){
-        criaTiros(posicao +45);
+        criaTiros(posicao + 1);
     }
 };
 
 document.addEventListener('keydown', (event) =>{
     if(event.code === 'KeyQ'){
         atirar();
-        atirando = true;
+        estaAtirando = true;
     }
 });
 
 document.addEventListener("keyup", (event) =>{
     if(event.code === 'KeyUp'){
-        atirando = false;
+        estaAtirando = false;
     }
 })
 
