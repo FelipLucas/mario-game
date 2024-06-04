@@ -124,7 +124,7 @@ const loop = setInterval(() =>{
             audioRoundTwo.play()
             audioStart.pause() //audio
             audioCoin.pause()
-        }, 1000)
+        }, 30000);
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';
@@ -336,7 +336,8 @@ function jump3(event){
             personagem.src = 'https://media.tenor.com/NJ1Z5ymf5S8AAAAi/mx-powerdown-fnf.gif';
         },650)
     }
-} document.removeEventListener('keydown', jump3)
+} document.removeEventListener('keydown', jump3);
+
 //subir nos blocos
 const subirBloco = setInterval(() =>{
 const personagemPosition = personagem.getBoundingClientRect();
