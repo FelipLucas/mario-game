@@ -202,6 +202,7 @@ closeChosenHard.addEventListener('click', function(){
 
 //next round
 const personagem = document.querySelector(".mario-two");
+const divMario = document.querySelector('.mario-div')
 const nextRound = document.querySelector('.div-next-round');
 const block = document.querySelector('.block') ;
 const blockTwo = document.querySelector('.block2');
@@ -215,7 +216,7 @@ const telaThree = document.querySelector('.part-two');
 const larguraCenario = telaThree.getBoundingClientRect();
 const primeiraTelaLargura = telaTwo.offsetWidth;
 const body = document.querySelector('.body');
-personagem.src = 'https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true';
+personagem.src = `https://github.com/JohnnyPeffer/jogoMario/blob/main/imagens/marioAndandoLadoDireito.gif?raw=true`;
 
 
 audioJump = new Audio("images/audios_audioPulo.wav")
@@ -236,6 +237,7 @@ let velocidade = 15;
 nextRound.addEventListener('click', () =>{
     telaOne.style.display = 'none';
     telaTwo.style.display = 'block';
+    telaThree.style.display = 'block';
 
     audioStartGame.play()
 })
@@ -432,6 +434,8 @@ function comerEstrela(){
     const starPosition = star.getBoundingClientRect();
 
     if(starPosition.left < personagemPosition.right && starPosition.right > personagemPosition.left && personagemPosition.top < starPosition.bottom){
+
+
         star.style.display = 'none';
         personagem.style.width = '200px';
         personagem.src = 'https://media.tenor.com/Yi1KpZShPK8AAAAi/penguin-madness-combat.gif';
@@ -461,7 +465,7 @@ function comerEstrela(){
             velocidade = 30;
         }, 1000);
     }
-}
+} 
 
 //moedas 
 const pontos = document.querySelector('.p-conatem-moedas2');
@@ -591,6 +595,20 @@ const subir = setInterval(() =>{
 
     if(telaBossResolucao.left < personagemPosition.right && telaBossResolucao.right > personagemPosition.left && personagemPosition.bottom > telaBossResolucao.top){
         setInterval(comerEstrela, 500);
+        setInterval(atirarTwo, 10)
+        /*document.addEventListener('keydown', (event) =>{
+            if(event.code === 'KeyQ'){
+                atirarTwo();
+                estaAtirando = true;
+            }
+        });
+
+        document.addEventListener('keyup', (event) =>{
+            if(event.code === 'KeyQ'){
+                estaAtirando = false;
+            }
+        });*/
+
         document.addEventListener('keydown', ataque);
 
         vidaInimigo.style.display = 'block';
@@ -620,6 +638,7 @@ const subir = setInterval(() =>{
     } 
 },10);
 
+//ataque mario
 function ataque(event){
     const personagemPosition  = personagem.getBoundingClientRect();
     const tiro = document.querySelector('.ataque-mario');
@@ -631,8 +650,8 @@ function ataque(event){
         tiro.style.display = 'none';
     }, 1500)
 }
-document.removeEventListener('keydown', ataque);
 
+//dano e ataque ao boss
 const danoInimigo = setInterval(() =>{
     const bossPosition = flowerInimigo.getBoundingClientRect();
     const vidaPorcentagemsWidth = vidaPorcentagem.offsetWidth;
@@ -645,3 +664,21 @@ const danoInimigo = setInterval(() =>{
         vidaPorcentagem.style.width = "550px";
     } 
 }, 10);
+
+const atirarTwo = () =>{
+    if(estaAtirando){
+        criarAtaque(posicao);
+    }
+}
+
+const criarAtaque = (personagemPositionRight) =>{
+    const ataqueBossTwo = document.createElement('div');
+    ataqueBossTwo.className = 'inimigo';
+    ataqueBossTwo.style.position = 'absolute';
+    ataqueBossTwo.style.width= '10px';
+    ataqueBossTwo.style.height = '10px';
+    ataqueBossTwo.style.borderRadius = '65%';
+    ataqueBossTwo.style.background = 'red';
+    ataqueBossTwo.style.right = personagemPositionRight + 'px';
+    telaThree.appendChild(ataqueBossTwo);
+}; 
