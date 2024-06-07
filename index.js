@@ -485,6 +485,7 @@ let tempoAtual = 400;
 let moedasAtual = 0;
 let pontosAtual = 0;
 let vidaAtual = 5;
+let vidaBoss = 100;
 let estaAtirando = false;
 
 function ganharVidaComMoedas(){
@@ -496,7 +497,7 @@ function ganharVidaComMoedas(){
 } setInterval(ganharVidaComMoedas, 10);
 
 //colisao inimigo
-const colisaoInimigo = setInterval(() =>{
+/*const colisaoInimigo = setInterval(() =>{
     const inimigoPosition = inimigo.getBoundingClientRect();
     const personagemPosition = personagem.getBoundingClientRect();
     const overlay = document.querySelector('.overlay')
@@ -513,7 +514,7 @@ const colisaoInimigo = setInterval(() =>{
         audioDeath.play()
         audioJump.volume = '0';
     }
-},10);
+},10);*/
 
 function matarInimigo(){
     const inimigoPosition = inimigo.getBoundingClientRect();
@@ -653,16 +654,20 @@ function ataque(event){
 
 //dano e ataque ao boss
 const danoInimigo = setInterval(() =>{
-    const bossPosition = flowerInimigo.getBoundingClientRect();
-    const vidaPorcentagemsWidth = vidaPorcentagem.offsetWidth;
     const tiro = document.querySelector('.ataque-mario');
-    const ataqueMarioPosition = tiro.getBoundingClientRect();
+    vidaPorcentagem.setAttribute("data-vida", vidaBoss);
+    let vidaBossAtual = parseInt(flowerInimigo.getAttribute("data-vida"), 10)
 
-    if(vidaPorcentagemsWidth == 600 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueMarioPosition.right){
-        vidaPorcentagem.style.width = "550px";
-    } if(vidaPorcentagemsWidth == 550 && vidaPorcentagemsWidth > 0 && bossPosition.left < ataqueMarioPosition.right){
-        vidaPorcentagem.style.width = "550px";
-    } 
+    flowerInimigo.forEach((ataque) =>{
+        const bossPosition = flowerInimigo.getBoundingClientRect();
+        const ataqueMarioPosition = tiro.getBoundingClientRect();
+
+        if(bossPosition.left < ataqueMarioPosition.right && bossPosition.left > ataqueMarioPosition.right){
+            vidaBossAtual--;
+        } else if(vidaBossAtual === 0){
+            
+        }
+    })
 }, 10);
 
 const atirarTwo = () =>{
