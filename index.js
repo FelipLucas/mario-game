@@ -124,7 +124,7 @@ const loop = setInterval(() =>{
             audioRoundTwo.play()
             audioStart.pause() //audio
             audioCoin.pause()
-        }, 30000);
+        }, 1000);
     }
     if(marioPosition > 80){
         coin.style.display = 'flex';

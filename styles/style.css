@@ -19,7 +19,7 @@ body{
 }
 
 .mario-game{
-    display: none;
+    display: block;
     position: relative;
     max-width: 100%;
     height: 100vh;
@@ -398,7 +398,7 @@ body{
 
 /*segundo game*/
 .super-mario-game{
-    display: block;  
+    display: none;  
     position: relative;
     max-width: 100vw;
     height: 100vh;
